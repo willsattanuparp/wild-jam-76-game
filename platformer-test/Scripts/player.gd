@@ -10,12 +10,22 @@ const FRICTION = 20
 var coyote_timer = 0.0
 var coyote_time = 0.2
 
+const FREEZE_COOLDOWN = 4.0
+var freeze_timer = 0.0
+
+signal special()
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
+#func _ready() -> void:
+	#freeze_ripple(1)
+#
+#var ripple_time = 0.0
+#var ripple_duration = 2.0 # Duration of the ripple effect in seconds
+#var ripple_speed = 50.0
+#
+#func _process(delta):
+	#ripple_time += delta
+	#$Sprite2D.material.set_shader_parameter("time",ripple_time)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	#Gravity effect
 	if !is_on_floor():
@@ -45,5 +55,9 @@ func _physics_process(delta: float) -> void:
 		#cancel momentum if head bumps ceiling
 		if is_on_ceiling():
 			velocity.y = 0
-	
+	if Input.is_action_just_pressed("Special") and freeze_timer <= 0:
+		freeze_timer = FREEZE_COOLDOWN
+		special.emit()
+	elif freeze_timer > 0:
+		freeze_timer -= delta
 	move_and_slide()
