@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://oojywiu5hsrb"]
+[gd_scene load_steps=13 format=4 uid="uid://oojywiu5hsrb"]
 
 [ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="1_hl7ps"]
 [ext_resource type="Script" path="res://Scripts/test_level.gd" id="1_ru0js"]
+[ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="2_lc36g"]
 [ext_resource type="Texture2D" uid="uid://f0s5mdu3uewl" path="res://icon.svg" id="2_tj11n"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_target.gd" id="2_whkfd"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/procam2d.gd" id="4_olo0q"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/nds/a.gd" id="6_6m87j"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="7_av15b"]
+[ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="9_fx6am"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8myks"]
 texture = ExtResource("2_tj11n")
@@ -32,11 +34,13 @@ endless = false
 enabled = true
 priority = 0
 
-[node name="TestLevel" type="Node2D"]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node")]
 script = ExtResource("1_ru0js")
+player = NodePath("Player")
+special_holder_node = NodePath("SpecialHolder")
 
 [node name="Player" parent="." instance=ExtResource("1_hl7ps")]
-position = Vector2(495, 449)
+position = Vector2(495, 448)
 
 [node name="PCamTarget" type="Node2D" parent="Player"]
 script = ExtResource("2_whkfd")
@@ -81,4 +85,13 @@ global_debug_draw = false
 
 [node name="SpecialHolder" type="Node2D" parent="."]
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Level_UI" parent="UI" instance=ExtResource("2_lc36g")]
+
+[node name="Projectile" parent="." instance=ExtResource("9_fx6am")]
+position = Vector2(908, 400)
+rotation = 2.91017
+
 [connection signal="special" from="Player" to="." method="_on_player_special"]
+[connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const GRAVITY = 9000
 const JUMP_FORCE = -1900
@@ -12,6 +12,10 @@ var coyote_time = 0.2
 
 const FREEZE_COOLDOWN = 4.0
 var freeze_timer = 0.0
+
+var hearts = 10
+signal ui_heart_damage()
+signal game_over()
 
 signal special()
 # Called when the node enters the scene tree for the first time.
@@ -61,3 +65,10 @@ func _physics_process(delta: float) -> void:
 	elif freeze_timer > 0:
 		freeze_timer -= delta
 	move_and_slide()
+
+func damage():
+	hearts -= 1
+	ui_heart_damage.emit()
+	if hearts <= 0:
+		print("game over")
+		game_over.emit()

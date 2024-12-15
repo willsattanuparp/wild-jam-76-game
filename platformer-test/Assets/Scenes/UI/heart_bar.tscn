@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvmwbdrqv3ylm"]
+
+[ext_resource type="Texture2D" uid="uid://l7lt0adcny1j" path="res://Assets/Sprites/UI/Heart and Settings Sprites.png" id="1_wcsbl"]
+[ext_resource type="Script" path="res://Scripts/heart_bar.gd" id="2_1lwa3"]
+[ext_resource type="PackedScene" uid="uid://b6i26vo0rajxs" path="res://Assets/Scenes/UI/heart.tscn" id="3_wp86s"]
+
+[node name="HeartBar" type="Sprite2D" node_paths=PackedStringArray("heart_holder")]
+texture = ExtResource("1_wcsbl")
+script = ExtResource("2_1lwa3")
+heart_holder = NodePath("Hearts")
+
+[node name="Hearts" type="Node2D" parent="."]
+position = Vector2(-0.5, 0)
+
+[node name="Heart5" parent="Hearts" instance=ExtResource("3_wp86s")]
+position = Vector2(-33, 0)
+
+[node name="Heart4" parent="Hearts" instance=ExtResource("3_wp86s")]
+position = Vector2(-16, 0)
+
+[node name="Heart3" parent="Hearts" instance=ExtResource("3_wp86s")]
+position = Vector2(1, 0)
+
+[node name="Heart2" parent="Hearts" instance=ExtResource("3_wp86s")]
+position = Vector2(18, 0)
+
+[node name="Heart1" parent="Hearts" instance=ExtResource("3_wp86s")]
+position = Vector2(35, 0)
