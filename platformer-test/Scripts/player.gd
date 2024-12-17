@@ -1,9 +1,9 @@
 class_name Player extends CharacterBody2D
 
-const GRAVITY = 4500
-const JUMP_FORCE = -900
-const VARIABLE_JUMP_MULTIPLIER = 1.5
-const MAX_SPEED = 400
+const GRAVITY = 4000
+const JUMP_FORCE = -800
+const VARIABLE_JUMP_MULTIPLIER = 1.8
+const MAX_SPEED = 300
 const ACCELERATION = 20
 const FRICTION = 20
 
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	#else:
 		#velocity.x = lerp(velocity.x, 0.0, FRICTION * delta)
 	#jumping
-	if Input.is_action_pressed("Jump") and Input.is_action_pressed("Down"):
+	if Input.is_action_just_pressed("Jump") and Input.is_action_pressed("Down"):
 		position.y += 1
 	elif Input.is_action_just_pressed("Jump") and coyote_timer > 0:#is_on_floor():
 		velocity.y = JUMP_FORCE
