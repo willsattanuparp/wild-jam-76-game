@@ -1,12 +1,20 @@
 class_name Projectile extends Area2D
 
 
-@export var speed = 600
+@export var initial_speed = 600
 @export var velocity = Vector2.RIGHT
+@onready var speed = initial_speed
 
+var freezing = false
 
 func freeze():
-	pass
+	freezing = true
+	print("freezing")
+	speed = 0
+
+func unfreeze():
+	freezing = false
+	speed = initial_speed
 
 func _on_body_entered(body: Node2D) -> void:
 	projectile_body_entered(body)

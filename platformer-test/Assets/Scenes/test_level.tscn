@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://oojywiu5hsrb"]
+[gd_scene load_steps=15 format=4 uid="uid://oojywiu5hsrb"]
 
 [ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="1_hl7ps"]
 [ext_resource type="Script" path="res://Scripts/test_level.gd" id="1_ru0js"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="9_d4878"]
 [ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="9_fx6am"]
 [ext_resource type="PackedScene" uid="uid://bntuicrgwiwdt" path="res://Assets/Scenes/Projectiles/exploding_projectile.tscn" id="10_a4aks"]
+[ext_resource type="PackedScene" uid="uid://ct6560qhtks6" path="res://Assets/Scenes/Projectiles/bouncing_projectile.tscn" id="11_gl6hg"]
 
 [sub_resource type="Resource" id="Resource_u3ojo"]
 script = ExtResource("7_av15b")
@@ -245,15 +246,19 @@ tile_set = SubResource("TileSet_fu8n6")
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="ExplodingPresent" parent="Projectiles" instance=ExtResource("10_a4aks")]
-position = Vector2(742, 239)
+position = Vector2(535, 50)
 rotation = 3.25233
-scale = Vector2(1, 1)
-collision_layer = 1
+projectile_scene = ExtResource("9_fx6am")
 velocity = Vector2(-1, -1)
 
 [node name="Projectile" parent="Projectiles" instance=ExtResource("9_fx6am")]
-position = Vector2(908, 400)
+position = Vector2(943, 145)
 rotation = 2.91017
+
+[node name="BouncingProjectile" parent="Projectiles" instance=ExtResource("11_gl6hg")]
+position = Vector2(799, 311)
+raycast_length = 20
+velocity = Vector2(-1, 1)
 
 [connection signal="special" from="Player" to="." method="_on_player_special"]
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]

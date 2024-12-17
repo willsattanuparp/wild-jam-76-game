@@ -2,6 +2,7 @@ extends Projectile
 
 const GRAVITY = 5
 
+@export var number_of_projectiles_in_explosion: int = 6
 @export var projectile_scene :PackedScene
 var is_moving = true
 
@@ -13,7 +14,7 @@ func projectile_move(delta: float):
 func projectile_body_entered(body: Node2D):
 	if body.is_in_group("Floor"):
 		is_moving = false
-		star_explosion(8)
+		star_explosion(number_of_projectiles_in_explosion)
 		queue_free()
 		print("hit floor")
 
@@ -24,4 +25,4 @@ func star_explosion(number_of_projectiles: int):
 		var projectile = projectile_scene.instantiate() as Projectile
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position
-		get_parent().add_child(projectile)
+		get_parent().call_deferred("add_child",projectile)

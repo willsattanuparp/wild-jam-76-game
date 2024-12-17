@@ -8,12 +8,7 @@ var test_shake : PCamShake
 #
 #func _ready() -> void:
 	#test_shake = $ProCam2D.get_addons()[0]
-	#test_shake.shake()
-
-#func _process(delta: float) -> void:
-	#print(test_shake.is_shaking())
-
-
+	#test_shake.shake()```
 func _on_player_special() -> void:
 	var special = special_scene.instantiate()
 	special.global_position = player.position

@@ -27,6 +27,8 @@ scale = Vector2(20, 20)
 texture = ExtResource("2_dm6lo")
 
 [node name="FreezeHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeHitbox"]
 shape = SubResource("CircleShape2D_7k785")
