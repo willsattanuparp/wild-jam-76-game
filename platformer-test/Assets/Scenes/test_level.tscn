@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://oojywiu5hsrb"]
+[gd_scene load_steps=14 format=4 uid="uid://oojywiu5hsrb"]
 
 [ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="1_hl7ps"]
 [ext_resource type="Script" path="res://Scripts/test_level.gd" id="1_ru0js"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="7_av15b"]
 [ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="9_d4878"]
 [ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="9_fx6am"]
+[ext_resource type="PackedScene" uid="uid://bntuicrgwiwdt" path="res://Assets/Scenes/Projectiles/exploding_projectile.tscn" id="10_a4aks"]
 
 [sub_resource type="Resource" id="Resource_u3ojo"]
 script = ExtResource("7_av15b")
@@ -237,13 +238,22 @@ global_debug_draw = false
 
 [node name="Level_UI" parent="UI" instance=ExtResource("2_lc36g")]
 
-[node name="Projectile" parent="." instance=ExtResource("9_fx6am")]
-position = Vector2(908, 400)
-rotation = 2.91017
-
-[node name="Environment" type="TileMapLayer" parent="."]
+[node name="Environment" type="TileMapLayer" parent="." groups=["Floor"]]
 tile_map_data = PackedByteArray("AAAMAA8AAgABAAIAAAANAA8AAgABAAIAAAAOAA8AAgABAAIAAAAPAA8AAgABAAIAAAAQAA8AAgABAAIAAAARAA8AAgABAAIAAAASAA8AAgABAAIAAAATAA8AAgABAAIAAAAUAA8AAgACAAIAAAALAA8AAgABAAIAAAAKAA8AAgAAAAIAAAASAA0AAgARAAUAAAATAA0AAgARAAUAAAAUAA0AAgARAAUAAAAMAA0AAgARAAUAAAALAA0AAgARAAUAAAAKAA0AAgARAAUAAAAVAA8AAgANAAMAAAAWAA8AAgAOAAMAAAAXAA8AAgAOAAMAAAAYAA8AAgAOAAMAAAAZAA8AAgAOAAMAAAAaAA8AAgAOAAMAAAAbAA8AAgAOAAMAAAAcAA8AAgAPAAMAAAAdAA8AAgANAAUAAAAeAA8AAgAOAAUAAAAfAA8AAgAOAAUAAAAgAA8AAgAOAAUAAAAgABAAAgAOAAYAAAAgABEAAgAOAAcAAAAgABIAAgAOAAgAAAAgABMAAgANAAkAAAAhABIAAgAPAAgAAAAhABEAAgAPAAcAAAAhABAAAgAPAAYAAAAhAA8AAgAPAAUAAAAfABAAAgAOAAYAAAAfABEAAgAOAAcAAAAfABIAAgAOAAgAAAAfABMAAgANAAkAAAAeABAAAgAOAAYAAAAeABEAAgAOAAcAAAAeABIAAgAOAAgAAAAeABMAAgANAAkAAAAdABAAAgANAAYAAAAdABEAAgANAAcAAAAdABIAAgANAAgAAAAdABMAAgANAAkAAAAhABMAAgANAAkAAAAJAA8AAgACAAAAAAAIAA8AAgABAAAAAAAHAA8AAgABAAAAAAAGAA8AAgABAAAAAAAFAA8AAgAAAAAAAAARAAsAAgACAAEAAAAQAAsAAgABAAEAAAAPAAsAAgABAAEAAAAOAAsAAgABAAEAAAANAAsAAgAAAAEAAAA=")
 tile_set = SubResource("TileSet_fu8n6")
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="ExplodingPresent" parent="Projectiles" instance=ExtResource("10_a4aks")]
+position = Vector2(742, 239)
+rotation = 3.25233
+scale = Vector2(1, 1)
+collision_layer = 1
+velocity = Vector2(-1, -1)
+
+[node name="Projectile" parent="Projectiles" instance=ExtResource("9_fx6am")]
+position = Vector2(908, 400)
+rotation = 2.91017
 
 [connection signal="special" from="Player" to="." method="_on_player_special"]
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]
