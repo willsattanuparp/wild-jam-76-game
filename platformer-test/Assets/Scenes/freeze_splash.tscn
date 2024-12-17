@@ -14,7 +14,7 @@ shader_parameter/rot_speed = 8.0
 shader_parameter/zoom_speed = 25.859
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k785"]
-radius = 64.0
+radius = 32.0
 
 [node name="FreezeSplash" type="Node2D" node_paths=PackedStringArray("freeze_explosion_texture", "freeze_hitbox")]
 script = ExtResource("1_myxlo")
@@ -23,7 +23,7 @@ freeze_hitbox = NodePath("FreezeHitbox")
 
 [node name="FreezeExplosionTexture" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_nj2tm")
-scale = Vector2(40, 40)
+scale = Vector2(20, 20)
 texture = ExtResource("2_dm6lo")
 
 [node name="FreezeHitbox" type="Area2D" parent="."]

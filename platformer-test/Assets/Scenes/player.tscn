@@ -4,13 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://f0s5mdu3uewl" path="res://icon.svg" id="2_lpuvu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w3f0"]
-size = Vector2(128, 128)
+size = Vector2(32, 64)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_n5ul1")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.5)
 texture = ExtResource("2_lpuvu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
