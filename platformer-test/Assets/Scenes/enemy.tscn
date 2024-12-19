@@ -13,3 +13,10 @@ vision_ray = NodePath("VisionRay")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="VisionRay" type="RayCast2D" parent="."]
+
+[node name="ChangePositionTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="ChangePositionTimer" to="." method="_on_change_position_timer_timeout"]

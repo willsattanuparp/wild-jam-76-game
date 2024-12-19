@@ -10,13 +10,17 @@ var local_position = 0
 @export var pacing_boundry: Vector2 = Vector2(100,-100)
 @export var vision_ray: RayCast2D
 @export var player: Player
+@export var current_landing: LandingPoint
 @export var jump_locations_holder: Node2D
 @onready var jump_locations = jump_locations_holder.get_children()
 
 var direction = Vector2.RIGHT
-var pos_change_leap_time = 1.0
+
+#for leap change
 var changed_position = false
 var target_pos = Vector2.ZERO
+var gravity_during_leap = 600
+var leaping = false
 
 const GRAVITY = 4000
 const JUMP_FORCE = -800
@@ -29,9 +33,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	movement_state_matcher(delta)
-	#Gravity effect
-	if !is_on_floor():
+	#Gravity effect - leaping will have its own gravity
+	if !is_on_floor() and !leaping:
 		velocity.y += GRAVITY * delta
+	elif leaping:
+		velocity.y += gravity_during_leap * delta
 	#print(velocity)
 	if current_movement_state != MOVEMENT_STATE.CHANGE_POSITION:
 		velocity.x = lerp(velocity.x, direction.x * MAX_SPEED, ACCELERATION * delta if direction.x != 0 else FRICTION * delta)
@@ -93,8 +99,7 @@ func movement_state_idle(delta):
 	direction.x = 0
 	if is_on_floor() and randf() < 0.001:
 		jump(JUMP_FORCE)
-	if randf() < 0.1:
-		print("changing")
+	if randf() < 0.01:
 		change_movement_state(MOVEMENT_STATE.PACING)
 
 
@@ -116,22 +121,30 @@ func movement_state_pacing(delta):
 
 func movement_state_change_position(delta):
 	if !changed_position:
-		var marker = jump_locations[randi() % jump_locations.size()]
+		leaping = true
+		var marker = current_landing
+		#make sure it doesnt get the same landing, otherwise reroll
+		while marker == current_landing:
+			marker = jump_locations[randi() % jump_locations.size()]
 		print(marker.id)
+		var pos_change_leap_time = current_landing.get_time_to_location(marker.id)
 		target_pos = marker.global_position
 		pacing_boundry = marker.get_boundries()
+		current_landing = marker
+		
 		var distance_x = target_pos.x - global_position.x
 		var distance_y = target_pos.y - global_position.y
 	
 	
 		var velocity_x = distance_x / (pos_change_leap_time)
-		var velocity_y = (distance_y / pos_change_leap_time) - (0.5 * GRAVITY * pos_change_leap_time)
+		var velocity_y = (distance_y / pos_change_leap_time) - (0.5 * gravity_during_leap * pos_change_leap_time)
 	
 		direction.x = sign(velocity_x)
 		velocity.x = velocity_x
 		jump(velocity_y)
 		changed_position = true
 	if abs(global_position.x - target_pos.x) < 5 and is_on_floor():
+		leaping = false
 		change_movement_state(MOVEMENT_STATE.IDLE)
 
 func jump_to_marker():
@@ -139,3 +152,8 @@ func jump_to_marker():
 
 func detect_obstacle_in_front() -> bool:
 	return false
+
+
+func _on_change_position_timer_timeout() -> void:
+	changed_position = false
+	change_movement_state(MOVEMENT_STATE.CHANGE_POSITION)

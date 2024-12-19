@@ -207,22 +207,46 @@ tile_set = SubResource("TileSet_inq6g")
 
 [node name="JumpLocations" type="Node2D" parent="."]
 
-[node name="MiddleUpperLanding" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
-position = Vector2(559, 158)
+[node name="LowerRightLanding" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
+position = Vector2(1027, 509)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
+time_to_jump_here_from_id = {
+1: 1.5,
+2: 3.0
+}
 
-[node name="LeftBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding"]
-position = Vector2(-94, 0)
+[node name="LeftBound" type="Marker2D" parent="JumpLocations/LowerRightLanding"]
+position = Vector2(-85, 1)
 
-[node name="RightBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding"]
-position = Vector2(93, 1)
+[node name="RightBound" type="Marker2D" parent="JumpLocations/LowerRightLanding"]
+position = Vector2(97, 1)
 
-[node name="LowerLeftLanding" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
-position = Vector2(189, 489)
+[node name="MiddleUpperLanding2" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
+position = Vector2(559, 189)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
 id = 1
+time_to_jump_here_from_id = {
+0: 1.5,
+2: 1.5
+}
+
+[node name="LeftBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding2"]
+position = Vector2(-85, 1)
+
+[node name="RightBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding2"]
+position = Vector2(97, 1)
+
+[node name="LowerLeftLanding" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
+position = Vector2(190, 511)
+left_bound = NodePath("LeftBound")
+right_bound = NodePath("RightBound")
+id = 2
+time_to_jump_here_from_id = {
+0: 3.0,
+1: 1.5
+}
 
 [node name="LeftBound" type="Marker2D" parent="JumpLocations/LowerLeftLanding"]
 position = Vector2(-159, -2)
@@ -234,13 +258,15 @@ position = Vector2(144, -1)
 
 [node name="SpecialHolder" type="Node2D" parent="."]
 
-[node name="EnemyTree" parent="." node_paths=PackedStringArray("player", "jump_locations_holder") instance=ExtResource("3_8la7n")]
+[node name="EnemyTree" parent="." node_paths=PackedStringArray("player", "current_landing", "jump_locations_holder") instance=ExtResource("3_8la7n")]
 position = Vector2(1026, 481)
 player = NodePath("../Player")
+current_landing = NodePath("../JumpLocations/LowerRightLanding")
 jump_locations_holder = NodePath("../JumpLocations")
 
 [node name="PCamTarget" type="Node2D" parent="EnemyTree"]
 script = ExtResource("3_rkrim")
+radius = 100.0
 
 [node name="Player" parent="." instance=ExtResource("2_ctt8u")]
 position = Vector2(495, 448)
@@ -268,7 +294,7 @@ smooth_rotation = true
 smooth_rotation_speed = 5.0
 zoom = 2.4
 smooth_zoom = true
-smooth_zoom_speed = 5.0
+smooth_zoom_speed = 10.0
 auto_zoom = true
 min_zoom = 0.0
 max_zoom = 5.0
