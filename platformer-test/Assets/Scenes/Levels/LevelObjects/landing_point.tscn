@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ekcws2r73mra"]
+
+[ext_resource type="Script" path="res://Scripts/landing_point.gd" id="1_5lmcs"]
+
+[node name="LandingPoint" type="Node2D"]
+script = ExtResource("1_5lmcs")

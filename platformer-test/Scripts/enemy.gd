@@ -15,6 +15,8 @@ var local_position = 0
 
 var direction = Vector2.RIGHT
 var pos_change_leap_time = 1.0
+var changed_position = false
+var target_pos = Vector2.ZERO
 
 const GRAVITY = 4000
 const JUMP_FORCE = -800
@@ -30,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	#Gravity effect
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
-	
+	#print(velocity)
 	if current_movement_state != MOVEMENT_STATE.CHANGE_POSITION:
 		velocity.x = lerp(velocity.x, direction.x * MAX_SPEED, ACCELERATION * delta if direction.x != 0 else FRICTION * delta)
 	move_and_slide()
@@ -91,7 +93,7 @@ func movement_state_idle(delta):
 	direction.x = 0
 	if is_on_floor() and randf() < 0.001:
 		jump(JUMP_FORCE)
-	if randf() < 0.001:
+	if randf() < 0.1:
 		print("changing")
 		change_movement_state(MOVEMENT_STATE.PACING)
 
@@ -99,34 +101,38 @@ func movement_state_idle(delta):
 func movement_state_pacing(delta):
 	if randf() < 0.01:
 		direction.x *= -1
-	if local_position >= pacing_boundry.x:
-		direction.x = -1
-	elif local_position <= pacing_boundry.y:
+	
+	if local_position <= pacing_boundry.x:
 		direction.x = 1
+	elif local_position >= pacing_boundry.y:
+		direction.x = -1
 	elif direction.x == 0:
 		direction.x = 1
 	local_position += direction.x * MAX_SPEED * delta
-	if is_on_floor() and randf() < 0.05:
+	if is_on_floor() and randf() < 0.01:
 		jump(JUMP_FORCE)
-	if randf() < 0.001:
+	if randf() < 0.0001:
 		change_movement_state(MOVEMENT_STATE.IDLE)
 
 func movement_state_change_position(delta):
-	var marker = jump_locations[randi() % jump_locations.size()]
-	var target_pos = marker.global_position
-	var distance_x = target_pos.x - global_position.x
-	var distance_y = target_pos.y - global_position.y
+	if !changed_position:
+		var marker = jump_locations[randi() % jump_locations.size()]
+		print(marker.id)
+		target_pos = marker.global_position
+		pacing_boundry = marker.get_boundries()
+		var distance_x = target_pos.x - global_position.x
+		var distance_y = target_pos.y - global_position.y
 	
 	
-	var velocity_x = distance_x / pos_change_leap_time
-	var velocity_y = (distance_y / pos_change_leap_time) - (0.5 * GRAVITY * pos_change_leap_time)
+		var velocity_x = distance_x / (pos_change_leap_time)
+		var velocity_y = (distance_y / pos_change_leap_time) - (0.5 * GRAVITY * pos_change_leap_time)
 	
-	direction.x = sign(velocity_x)
-	velocity.x = velocity_x
-	if abs(global_position.x - target_pos.x) < 200 and is_on_floor():
-		change_movement_state(MOVEMENT_STATE.IDLE)
-	elif is_on_floor():
+		direction.x = sign(velocity_x)
+		velocity.x = velocity_x
 		jump(velocity_y)
+		changed_position = true
+	if abs(global_position.x - target_pos.x) < 5 and is_on_floor():
+		change_movement_state(MOVEMENT_STATE.IDLE)
 
 func jump_to_marker():
 	pass
