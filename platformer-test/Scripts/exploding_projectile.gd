@@ -2,6 +2,7 @@ extends Projectile
 
 const GRAVITY = 5
 
+@export var explode_from_timer: bool = false
 @export var number_of_projectiles_in_explosion: int = 6
 @export var projectile_scene :PackedScene
 var is_moving = true
@@ -25,4 +26,6 @@ func star_explosion(number_of_projectiles: int):
 		var projectile = projectile_scene.instantiate() as Projectile
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position
+		if freezing:
+			projectile.freeze()
 		get_parent().call_deferred("add_child",projectile)

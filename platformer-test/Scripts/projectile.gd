@@ -6,11 +6,13 @@ class_name Projectile extends Area2D
 @onready var speed = initial_speed
 
 var freezing = false
+var freeze_rate = 5
+
 
 func freeze():
 	freezing = true
-	print("freezing")
-	speed = 0
+	#print("freezing")
+	#set_collision_mask_value(1,false)
 
 func unfreeze():
 	freezing = false
@@ -23,6 +25,10 @@ func _on_body_entered(body: Node2D) -> void:
 		projectile_explode()
 
 func _process(delta: float) -> void:
+	if freezing and speed > 0:
+		speed -= freeze_rate
+	elif speed < 0:
+		speed = 0
 	projectile_move(delta)
 
 func projectile_move(delta: float):

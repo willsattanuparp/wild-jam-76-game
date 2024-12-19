@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciqkefpikuae8"]
+
+[ext_resource type="PackedScene" uid="uid://bvqx0ai7kl6y5" path="res://Assets/Scenes/enemy.tscn" id="1_avf5k"]
+[ext_resource type="Script" path="res://Scripts/enemy_tree.gd" id="2_1gqo4"]
+[ext_resource type="Texture2D" uid="uid://p5mthhoi8jg5" path="res://Assets/Sprites/Character/TreeBossSprite.png" id="3_ljwdy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cjsxd"]
+radius = 23.0
+height = 90.0
+
+[node name="EnemyTree" instance=ExtResource("1_avf5k")]
+collision_layer = 16
+script = ExtResource("2_1gqo4")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -34)
+texture = ExtResource("3_ljwdy")
+hframes = 16
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_cjsxd")

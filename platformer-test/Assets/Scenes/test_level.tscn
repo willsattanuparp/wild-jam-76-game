@@ -246,18 +246,17 @@ tile_set = SubResource("TileSet_fu8n6")
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="ExplodingPresent" parent="Projectiles" instance=ExtResource("10_a4aks")]
-position = Vector2(535, 50)
+position = Vector2(911, 220)
 rotation = 3.25233
 projectile_scene = ExtResource("9_fx6am")
 velocity = Vector2(-1, -1)
 
 [node name="Projectile" parent="Projectiles" instance=ExtResource("9_fx6am")]
-position = Vector2(943, 145)
+position = Vector2(937, 397)
 rotation = 2.91017
 
 [node name="BouncingProjectile" parent="Projectiles" instance=ExtResource("11_gl6hg")]
-position = Vector2(799, 311)
-raycast_length = 20
+position = Vector2(782, 393)
 velocity = Vector2(-1, 1)
 
 [connection signal="special" from="Player" to="." method="_on_player_special"]
