@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_y31qk"]
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("vision_ray")]
-collision_mask = 6
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("1_y31qk")
 vision_ray = NodePath("VisionRay")
 

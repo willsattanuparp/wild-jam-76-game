@@ -9,7 +9,6 @@ radius = 23.0
 height = 90.0
 
 [node name="EnemyTree" instance=ExtResource("1_avf5k")]
-collision_layer = 16
 script = ExtResource("2_1gqo4")
 
 [node name="Sprite2D" parent="." index="0"]

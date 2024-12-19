@@ -204,12 +204,22 @@ tile_set = SubResource("TileSet_inq6g")
 tile_map_data = PackedByteArray("AAAHAA8AAgACAAoAAAACAA8AAgACAAoAAAAJAA8AAgADAAoAAAASAA8AAgABAAoAAAAVAA8AAgACAAoAAAAUAA8AAgAEAAoAAAALAA8AAgAEAAoAAAAMAA8AAgABAAoAAAAcAA8AAgAEAAoAAAA=")
 tile_set = SubResource("TileSet_inq6g")
 
+[node name="JumpLocations" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="JumpLocations"]
+position = Vector2(121, 482)
+
+[node name="Marker2D2" type="Marker2D" parent="JumpLocations"]
+position = Vector2(564, 155)
+
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="SpecialHolder" type="Node2D" parent="."]
 
-[node name="EnemyTree" parent="." instance=ExtResource("3_8la7n")]
+[node name="EnemyTree" parent="." node_paths=PackedStringArray("player", "jump_locations_holder") instance=ExtResource("3_8la7n")]
 position = Vector2(1026, 481)
+player = NodePath("../Player")
+jump_locations_holder = NodePath("../JumpLocations")
 
 [node name="PCamTarget" type="Node2D" parent="EnemyTree"]
 script = ExtResource("3_rkrim")
