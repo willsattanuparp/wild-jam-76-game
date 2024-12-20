@@ -1,11 +1,11 @@
 class_name Projectile extends Area2D
 
 
-const INITIAL_GRAVITY = 5.0
-var current_gravity = INITIAL_GRAVITY
+@export var gravity_effect: float = 5.0
+@onready var current_gravity = gravity_effect
 
-@export var initial_speed = 600
-@export var velocity = Vector2.RIGHT
+@export var initial_speed: int = 600
+@export var velocity: Vector2 = Vector2.RIGHT
 @export var collision_shape: CollisionShape2D
 
 @export var affected_by_gravity: bool = false
@@ -20,10 +20,11 @@ var is_moving = true
 @export var explodes_on_floor: bool = false
 #TODO explode from timer
 @export var explode_from_timer: bool = false
-var explosion_timer = 4.0
+@export var explosion_timer: float = 4.0
 
 @export var number_of_projectiles_in_explosion: int = 6
-@export var projectile_scene :PackedScene
+@export var projectile_scene: PackedScene
+@export var projectile_stats: Resource
 
 #bounce logic
 @export var collision_ray: RayCast2D
@@ -48,7 +49,7 @@ func _ready() -> void:
 		set_collision_mask_value(3,true)
 		collision_ray.set_collision_mask_value(3,true)
 	if affected_by_gravity:
-		gravity_freeze_rate = INITIAL_GRAVITY / (speed / freeze_rate)
+		gravity_freeze_rate = gravity_effect / (speed / freeze_rate)
 
 func freeze():
 	freezing = true
@@ -89,7 +90,7 @@ func _process(delta: float) -> void:
 			current_gravity += gravity_freeze_rate * delta
 		if speed > initial_speed:
 			speed = initial_speed
-			current_gravity = INITIAL_GRAVITY
+			current_gravity = gravity_effect
 		if speed == initial_speed:
 			unfreezing = false
 	#explosion based on timer
@@ -141,6 +142,7 @@ func star_explosion(number_of_projectiles: int):
 	for i in number_of_projectiles:
 		var angle = angle_inc * i
 		var projectile = projectile_scene.instantiate() as Projectile
+		initialize_spawning_projectile_from_resource(projectile)
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position
 		if freezing:
@@ -149,3 +151,20 @@ func star_explosion(number_of_projectiles: int):
 
 func calculate_ray():
 	collision_ray.target_position = velocity.normalized() * raycast_length
+
+func initialize_spawning_projectile_from_resource(proj: Projectile):
+	proj.initial_speed = projectile_stats.initial_speed
+	proj.velocity = projectile_stats.velocity
+	proj.gravity_effect = projectile_stats.gravity_effect
+	proj.affected_by_gravity = projectile_stats.affected_by_gravity
+	proj.bounces_off_floor = projectile_stats.bounces_off_floor
+	proj.affected_by_hard_floor = projectile_stats.affected_by_hard_floor
+	proj.affected_by_soft_floor = projectile_stats.affected_by_soft_floor
+#explosion logic
+	proj.explodes_on_floor = projectile_stats.explodes_on_floor
+#TODO explode from timer
+	proj.explode_from_timer = projectile_stats.explode_from_timer
+	proj.explosion_timer = projectile_stats.explosion_timer
+
+	proj.number_of_projectiles_in_explosion = projectile_stats.number_of_projectiles_in_explosion
+	proj.projectile_scene = projectile_stats.projectile_scene
