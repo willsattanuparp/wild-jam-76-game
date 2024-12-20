@@ -155,5 +155,7 @@ func detect_obstacle_in_front() -> bool:
 
 
 func _on_change_position_timer_timeout() -> void:
-	changed_position = false
-	change_movement_state(MOVEMENT_STATE.CHANGE_POSITION)
+	if randf() < .5:
+		print("changing")
+		changed_position = false
+		change_movement_state(MOVEMENT_STATE.CHANGE_POSITION)
