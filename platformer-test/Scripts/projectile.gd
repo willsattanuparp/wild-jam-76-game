@@ -13,7 +13,7 @@ class_name Projectile extends Area2D
 @export var bounces_off_floor: bool = false
 @export var affected_by_hard_floor: bool = false
 @export var affected_by_soft_floor: bool = false
-@onready var speed = initial_speed
+var speed = initial_speed
 
 #used to stop the main projectile after explosion
 var is_moving = true
@@ -44,7 +44,8 @@ var frozen = false
 var unfreezing = false
 var freeze_rate = 500.0
 var unfreeze_rate = 500.0
-var frozen_timer = 4.0
+var initial_frozen_timer = 4.0
+var frozen_timer = initial_frozen_timer
 var gravity_freeze_rate = 0.0
 
 func _ready() -> void:
@@ -59,11 +60,15 @@ func _ready() -> void:
 		gravity_freeze_rate = gravity_effect / (speed / freeze_rate)
 
 func freeze():
+	frozen_timer = initial_frozen_timer
+	unfreezing = false
+	frozen = false
 	freezing = true
-	print("freezing")
+	#print("freezing")
 	#set_collision_mask_value(1,false)
 
 func unfreeze():
+	freezing = false
 	frozen = false
 	unfreezing = true
 
@@ -85,11 +90,12 @@ func _process(delta: float) -> void:
 		if speed == 0:
 			freezing = false
 			frozen = true
-			print("frozen")
+			#print("frozen")
 	if frozen:
 		if frozen_timer > 0:
 			frozen_timer -= delta
 		elif frozen_timer <= 0:
+			frozen_timer = initial_frozen_timer
 			unfreeze()
 	if unfreezing:
 		if speed < initial_speed:
@@ -139,7 +145,7 @@ func projectile_explode():
 func projectile_body_entered(body: Node2D):
 	#explodes on the floor
 	if body.is_in_group("Floor"):
-		print("collided")
+		#print("collided")
 		if explodes_on_floor and !ignore_first_bounce_collision:
 			is_moving = false
 			if projectile_scene != null:
@@ -150,9 +156,9 @@ func projectile_body_entered(body: Node2D):
 		elif ignore_first_bounce_collision:
 			ignore_first_bounce_collision = false
 		#bounces off floor
-		print(collision_ray.is_colliding())
+		#print(collision_ray.is_colliding())
 		if bounces_off_floor and collision_ray.is_colliding() and collision_ray.get_collider().is_in_group("Floor"):
-			print("collide")
+			#print("collide")
 			var collision_normal = collision_ray.get_collision_normal()
 			velocity = velocity.bounce(collision_normal)
 			calculate_ray()
@@ -169,6 +175,7 @@ func star_explosion(number_of_projectiles: int,collide_on_floor: bool):
 		projectile.position -= (velocity * speed) * (4.0/120)
 		projectile.ignore_first_bounce_collision = true
 		if freezing:
+			projectile.speed *= (speed/initial_speed)
 			projectile.freeze()
 		if collide_on_floor:
 			if projectile.affected_by_hard_floor:

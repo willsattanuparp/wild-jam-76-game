@@ -10,6 +10,15 @@ const FRICTION = 20
 var coyote_timer = 0.0
 var coyote_time = 0.2
 
+@export var strike_hitbox: Area2D
+@export var player_sprite: Sprite2D
+
+var can_attack: bool = true
+var attack_duration = 0.3
+@onready var attack_timer = attack_duration
+
+var facing_right = true
+
 const FREEZE_COOLDOWN = 4.0
 var freeze_timer = 0.0
 
@@ -29,6 +38,16 @@ signal special()
 #func _process(delta):
 	#ripple_time += delta
 	#$Sprite2D.material.set_shader_parameter("time",ripple_time)
+
+func _process(delta: float) -> void:
+	if !can_attack:
+		if attack_timer > 0:
+			attack_timer -= delta
+		else:
+			can_attack = true
+			strike_hitbox.monitoring = false
+			strike_hitbox.visible = false
+			attack_timer = attack_duration
 
 func _physics_process(delta: float) -> void:
 	#Gravity effect
@@ -62,12 +81,30 @@ func _physics_process(delta: float) -> void:
 		if is_on_ceiling():
 			velocity.y = 0
 	
+	#strike
+	if Input.is_action_just_pressed("Attack") and can_attack:
+		can_attack = false
+		strike_hitbox.monitoring = true
+		strike_hitbox.visible = true
+	#special - freeze
 	if Input.is_action_just_pressed("Special") and freeze_timer <= 0:
 		freeze_timer = FREEZE_COOLDOWN
 		special.emit()
 	elif freeze_timer > 0:
 		freeze_timer -= delta
+		
+	#directional logic
+	if velocity.x != 0:
+		if velocity.x > 0 and !facing_right:
+			flip_player(true)
+		elif velocity.x < 0 and facing_right:
+			flip_player(false)
 	move_and_slide()
+
+func flip_player(face_right):
+	facing_right = face_right
+	strike_hitbox.position.x *= -1
+	player_sprite.scale.x *= -1
 
 func damage():
 	hearts -= 1

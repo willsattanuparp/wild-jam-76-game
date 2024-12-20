@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq5rw3tkjsfom"]
+[gd_scene load_steps=5 format=3 uid="uid://dq5rw3tkjsfom"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_n5ul1"]
 [ext_resource type="Texture2D" uid="uid://f0s5mdu3uewl" path="res://icon.svg" id="2_lpuvu"]
@@ -6,13 +6,29 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w3f0"]
 size = Vector2(32, 64)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3isn"]
+size = Vector2(30, 64)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("strike_hitbox", "player_sprite") groups=["Player"]]
 collision_mask = 6
 script = ExtResource("1_n5ul1")
+strike_hitbox = NodePath("StrikeHitbox")
+player_sprite = NodePath("PlayerSprite")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 1.84774e-06)
 scale = Vector2(0.25, 0.5)
 texture = ExtResource("2_lpuvu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7w3f0")
+
+[node name="StrikeHitbox" type="Area2D" parent="."]
+position = Vector2(31, 0)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeHitbox"]
+shape = SubResource("RectangleShape2D_i3isn")

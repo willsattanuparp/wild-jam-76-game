@@ -79,26 +79,26 @@ func change_movement_state(new_state: MOVEMENT_STATE):
 
 
 #attack state methods
-func attack_state_begin(delta: float):
+func attack_state_begin(_delta: float):
 	pass
 
-func movement_state_begin(delta: float):
+func movement_state_begin(_delta: float):
 	pass
 
-func attack_state_idle(delta):
+func attack_state_idle(_delta):
 	pass
 
-func attack_state_phase_one(delta):
+func attack_state_phase_one(_delta):
 	pass
 
-func attack_state_phase_two(delta):
+func attack_state_phase_two(_delta):
 	pass
 
-func attack_state_phase_three(delta):
+func attack_state_phase_three(_delta):
 	pass
 
 #movement state methods
-func movement_state_idle(delta):
+func movement_state_idle(_delta):
 	direction.x = 0
 	if is_on_floor() and randf() < 0.001:
 		jump(JUMP_FORCE)
@@ -122,7 +122,7 @@ func movement_state_pacing(delta):
 	if randf() < 0.0001:
 		change_movement_state(MOVEMENT_STATE.IDLE)
 
-func movement_state_change_position(delta):
+func movement_state_change_position(_delta):
 	if !changed_position:
 		leaping = true
 		var marker = current_landing
