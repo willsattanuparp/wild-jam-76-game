@@ -1,6 +1,7 @@
 class_name Projectile extends Area2D
 
 
+
 @export var gravity_effect: float = 5.0
 @onready var current_gravity = gravity_effect
 
@@ -14,6 +15,7 @@ class_name Projectile extends Area2D
 @export var affected_by_soft_floor: bool = false
 @onready var speed = initial_speed
 
+#used to stop the main projectile after explosion
 var is_moving = true
 
 #explosion logic
@@ -21,6 +23,11 @@ var is_moving = true
 #TODO explode from timer
 @export var explode_from_timer: bool = false
 @export var explosion_timer: float = 4.0
+
+#used to prevent instant explosion on floor explosion
+#var able_to_explode_timer = .3
+#var can_star_explode = false
+var ignore_first_bounce_collision = false
 
 @export var number_of_projectiles_in_explosion: int = 6
 @export var projectile_scene: PackedScene
@@ -30,7 +37,7 @@ var is_moving = true
 @export var collision_ray: RayCast2D
 var recalculate_ray_counter = 0
 var recalculate_ray_frames = 6
-@onready var raycast_length: float = collision_shape.shape.radius * 1.5
+@onready var raycast_length: float = collision_shape.shape.radius * 2
 
 var freezing = false
 var frozen = false
@@ -99,12 +106,21 @@ func _process(delta: float) -> void:
 			explosion_timer -= delta
 		elif explosion_timer <= 0:
 			if projectile_scene != null:
-				star_explosion(number_of_projectiles_in_explosion)
+				star_explosion(number_of_projectiles_in_explosion,false)
 			else:
 				printerr("projectile not found")
 			queue_free()
 	#print("grav:" + str(current_gravity))
 	#print("speed:" + str(speed))
+	
+	#if !can_star_explode and explodes_on_floor:
+		#print(able_to_explode_timer)
+		#if able_to_explode_timer > 0:
+			#able_to_explode_timer -= delta
+		#elif able_to_explode_timer <= 0:
+			#can_star_explode = true
+
+func _physics_process(delta: float) -> void:
 	if is_moving:
 		projectile_move(delta)
 
@@ -122,22 +138,26 @@ func projectile_explode():
 
 func projectile_body_entered(body: Node2D):
 	#explodes on the floor
-	if body.is_in_group("Floor") and explodes_on_floor:
-		is_moving = false
-		if projectile_scene != null:
-			star_explosion(number_of_projectiles_in_explosion)
-		else:
-			printerr("projectile not found")
-		queue_free()
-	#bounces off floor
-	print(collision_ray.is_colliding())
-	if bounces_off_floor and collision_ray.is_colliding() and collision_ray.get_collider().is_in_group("Floor"):
-		print("collide")
-		var collision_normal = collision_ray.get_collision_normal()
-		velocity = velocity.bounce(collision_normal)
-		calculate_ray()
+	if body.is_in_group("Floor"):
+		print("collided")
+		if explodes_on_floor and !ignore_first_bounce_collision:
+			is_moving = false
+			if projectile_scene != null:
+				star_explosion(number_of_projectiles_in_explosion,true)
+			else:
+				printerr("projectile not found")
+			queue_free()
+		elif ignore_first_bounce_collision:
+			ignore_first_bounce_collision = false
+		#bounces off floor
+		print(collision_ray.is_colliding())
+		if bounces_off_floor and collision_ray.is_colliding() and collision_ray.get_collider().is_in_group("Floor"):
+			print("collide")
+			var collision_normal = collision_ray.get_collision_normal()
+			velocity = velocity.bounce(collision_normal)
+			calculate_ray()
 
-func star_explosion(number_of_projectiles: int):
+func star_explosion(number_of_projectiles: int,collide_on_floor: bool):
 	var angle_inc = TAU / number_of_projectiles
 	for i in number_of_projectiles:
 		var angle = angle_inc * i
@@ -145,8 +165,18 @@ func star_explosion(number_of_projectiles: int):
 		initialize_spawning_projectile_from_resource(projectile)
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position
+		#offset spawn-in so the collisions work
+		projectile.position -= (velocity * speed) * (4.0/120)
+		projectile.ignore_first_bounce_collision = true
 		if freezing:
 			projectile.freeze()
+		if collide_on_floor:
+			if projectile.affected_by_hard_floor:
+				set_collision_mask_value(2,false)
+				collision_ray.set_collision_mask_value(2,false)
+			if projectile.affected_by_soft_floor:
+				set_collision_mask_value(3,false)
+				collision_ray.set_collision_mask_value(3,false)
 		get_parent().call_deferred("add_child",projectile)
 
 func calculate_ray():
@@ -168,3 +198,4 @@ func initialize_spawning_projectile_from_resource(proj: Projectile):
 
 	proj.number_of_projectiles_in_explosion = projectile_stats.number_of_projectiles_in_explosion
 	proj.projectile_scene = projectile_stats.projectile_scene
+	proj.projectile_stats = projectile_stats.projectile_stats

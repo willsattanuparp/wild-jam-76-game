@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=18 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
 [ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="2_ctt8u"]
@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/procam2d.gd" id="4_dgr4m"]
 [ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="4_hn7x0"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/nds/a.gd" id="5_5i5lx"]
-[ext_resource type="Resource" uid="uid://l62wks43it0j" path="res://Scripts/Resources/proj_resource.tres" id="5_bo0kb"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="6_hf1du"]
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="6_sjbbk"]
 [ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="7_yh47m"]
 [ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="8_t0n4y"]
 
@@ -176,6 +176,38 @@ physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_i5esj")
 
+[sub_resource type="Resource" id="Resource_haobx"]
+resource_local_to_scene = true
+script = ExtResource("6_sjbbk")
+initial_speed = 600
+velocity = Vector2(1, 0)
+gravity_effect = 5.0
+affected_by_gravity = false
+bounces_off_floor = false
+affected_by_hard_floor = false
+affected_by_soft_floor = false
+explodes_on_floor = false
+explode_from_timer = false
+explosion_timer = 4.0
+number_of_projectiles_in_explosion = 6
+
+[sub_resource type="Resource" id="Resource_75iqk"]
+resource_local_to_scene = true
+script = ExtResource("6_sjbbk")
+initial_speed = 600
+velocity = Vector2(1, 0)
+gravity_effect = 5.0
+affected_by_gravity = true
+bounces_off_floor = true
+affected_by_hard_floor = true
+affected_by_soft_floor = false
+explodes_on_floor = true
+explode_from_timer = false
+explosion_timer = 4.0
+number_of_projectiles_in_explosion = 6
+projectile_scene = ExtResource("4_hn7x0")
+projectile_stats = SubResource("Resource_haobx")
+
 [sub_resource type="Resource" id="Resource_u3ojo"]
 script = ExtResource("6_hf1du")
 preset = 8
@@ -265,7 +297,7 @@ bounces_off_floor = true
 affected_by_hard_floor = true
 explodes_on_floor = true
 projectile_scene = ExtResource("4_hn7x0")
-projectile_stats = ExtResource("5_bo0kb")
+projectile_stats = SubResource("Resource_75iqk")
 
 [node name="SpecialHolder" type="Node2D" parent="."]
 

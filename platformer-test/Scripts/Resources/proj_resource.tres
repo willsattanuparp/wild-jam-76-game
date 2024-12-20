@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="1_bs1cj"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_bs1cj")
 initial_speed = 600
 velocity = Vector2(1, 0)

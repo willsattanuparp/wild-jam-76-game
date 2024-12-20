@@ -20,5 +20,6 @@ texture = ExtResource("2_bwj5r")
 shape = SubResource("CircleShape2D_36tpw")
 
 [node name="CollisionRay" type="RayCast2D" parent="."]
+collision_mask = 0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
