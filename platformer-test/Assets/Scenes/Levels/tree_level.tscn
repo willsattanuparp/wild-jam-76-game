@@ -176,7 +176,7 @@ physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_i5esj")
 
-[sub_resource type="Resource" id="Resource_403y7"]
+[sub_resource type="Resource" id="Resource_0d56l"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 600
@@ -191,7 +191,7 @@ explode_from_timer = false
 explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 
-[sub_resource type="Resource" id="Resource_cxvhr"]
+[sub_resource type="Resource" id="Resource_onl6s"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 600
@@ -206,7 +206,7 @@ explode_from_timer = false
 explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 projectile_scene = ExtResource("4_hn7x0")
-projectile_stats = SubResource("Resource_403y7")
+projectile_stats = SubResource("Resource_0d56l")
 
 [sub_resource type="Resource" id="Resource_u3ojo"]
 script = ExtResource("6_hf1du")
@@ -256,7 +256,7 @@ position = Vector2(-85, 1)
 [node name="RightBound" type="Marker2D" parent="JumpLocations/LowerRightLanding"]
 position = Vector2(97, 1)
 
-[node name="MiddleUpperLanding2" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
+[node name="MiddleUpperLanding" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
 position = Vector2(559, 189)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
@@ -266,10 +266,10 @@ time_to_jump_here_from_id = {
 2: 1.5
 }
 
-[node name="LeftBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding2"]
+[node name="LeftBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding"]
 position = Vector2(-85, 1)
 
-[node name="RightBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding2"]
+[node name="RightBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding"]
 position = Vector2(97, 1)
 
 [node name="LowerLeftLanding" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_umjnq")]
@@ -297,14 +297,13 @@ bounces_off_floor = true
 affected_by_hard_floor = true
 explodes_on_floor = true
 projectile_scene = ExtResource("4_hn7x0")
-projectile_stats = SubResource("Resource_cxvhr")
+projectile_stats = SubResource("Resource_onl6s")
 
 [node name="SpecialHolder" type="Node2D" parent="."]
 
-[node name="EnemyTree" parent="." node_paths=PackedStringArray("animation_player", "player", "current_landing", "jump_locations_holder") instance=ExtResource("3_8la7n")]
+[node name="EnemyTree" parent="." node_paths=PackedStringArray("player", "current_landing", "jump_locations_holder") instance=ExtResource("3_8la7n")]
 position = Vector2(1026, 481)
 pacing_boundry = null
-animation_player = NodePath("AnimationPlayer")
 player = NodePath("../Player")
 current_landing = NodePath("../JumpLocations/LowerRightLanding")
 jump_locations_holder = NodePath("../JumpLocations")
