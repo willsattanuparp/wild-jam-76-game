@@ -28,6 +28,9 @@ const ACCELERATION = 20
 const FRICTION = 20
 const MAX_SPEED = 200
 
+func _ready() -> void:
+	pacing_boundry = current_landing.get_boundries()
+
 func _process(delta: float) -> void:
 	attack_state_matcher(delta)
 
@@ -106,10 +109,10 @@ func movement_state_idle(delta):
 func movement_state_pacing(delta):
 	if randf() < 0.01:
 		direction.x *= -1
-	
-	if local_position <= pacing_boundry.x:
+	#TODO: Change to global position
+	if global_position.x <= pacing_boundry.x:
 		direction.x = 1
-	elif local_position >= pacing_boundry.y:
+	elif global_position.x >= pacing_boundry.y:
 		direction.x = -1
 	elif direction.x == 0:
 		direction.x = 1
