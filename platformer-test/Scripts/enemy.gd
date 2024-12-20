@@ -6,6 +6,8 @@ enum MOVEMENT_STATE {  IDLE, PACING, CHANGE_POSITION  }
 var current_attack_state : ATTACK_STATE = ATTACK_STATE.IDLE
 var current_movement_state : MOVEMENT_STATE = MOVEMENT_STATE.CHANGE_POSITION
 
+@export var animation_player: AnimationPlayer
+
 var local_position = 0
 @export var pacing_boundry: Vector2 = Vector2(100,-100)
 @export var vision_ray: RayCast2D
@@ -21,12 +23,13 @@ var changed_position = false
 var target_pos = Vector2.ZERO
 var gravity_during_leap = 600
 var leaping = false
+var jumping = false
 
-const GRAVITY = 4000
-const JUMP_FORCE = -800
-const ACCELERATION = 20
-const FRICTION = 20
-const MAX_SPEED = 200
+var GRAVITY = 4000
+var JUMP_FORCE = -800
+var ACCELERATION = 20
+var FRICTION = 20
+var MAX_SPEED = 200
 
 func _ready() -> void:
 	pacing_boundry = current_landing.get_boundries()
@@ -41,13 +44,24 @@ func _physics_process(delta: float) -> void:
 		velocity.y += GRAVITY * delta
 	elif leaping:
 		velocity.y += gravity_during_leap * delta
+	if velocity.y == 0 and is_on_floor():
+		jumping = false
 	#print(velocity)
 	if current_movement_state != MOVEMENT_STATE.CHANGE_POSITION:
 		velocity.x = lerp(velocity.x, direction.x * MAX_SPEED, ACCELERATION * delta if direction.x != 0 else FRICTION * delta)
+	movement_animations(4.0)
 	move_and_slide()
 
-func jump(jump_force):
+func movement_animations(anim_speed):
+	pass
+
+func jump(jump_force,anim_speed):
+	jumping = true
 	velocity.y = jump_force
+	play_jump_animation(anim_speed)
+
+func play_jump_animation(anim_speed):
+	pass
 
 func attack_state_matcher(delta: float):
 	match current_attack_state:
@@ -101,7 +115,7 @@ func attack_state_phase_three(_delta):
 func movement_state_idle(_delta):
 	direction.x = 0
 	if is_on_floor() and randf() < 0.001:
-		jump(JUMP_FORCE)
+		jump(JUMP_FORCE, 2.0)
 	if randf() < 0.01:
 		change_movement_state(MOVEMENT_STATE.PACING)
 
@@ -117,8 +131,8 @@ func movement_state_pacing(delta):
 	elif direction.x == 0:
 		direction.x = 1
 	local_position += direction.x * MAX_SPEED * delta
-	if is_on_floor() and randf() < 0.01:
-		jump(JUMP_FORCE)
+	if is_on_floor() and randf() < 0.001:
+		jump(JUMP_FORCE, 2.0)
 	if randf() < 0.0001:
 		change_movement_state(MOVEMENT_STATE.IDLE)
 
@@ -144,7 +158,7 @@ func movement_state_change_position(_delta):
 	
 		direction.x = sign(velocity_x)
 		velocity.x = velocity_x
-		jump(velocity_y)
+		jump(velocity_y, 1.2 / pos_change_leap_time)
 		changed_position = true
 	if abs(global_position.x - target_pos.x) < 5 and is_on_floor():
 		leaping = false

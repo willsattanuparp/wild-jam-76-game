@@ -46,7 +46,6 @@ func _process(delta: float) -> void:
 		else:
 			can_attack = true
 			strike_hitbox.monitoring = false
-			strike_hitbox.visible = false
 			attack_timer = attack_duration
 
 func _physics_process(delta: float) -> void:
@@ -85,7 +84,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Attack") and can_attack:
 		can_attack = false
 		strike_hitbox.monitoring = true
-		strike_hitbox.visible = true
 	#special - freeze
 	if Input.is_action_just_pressed("Special") and freeze_timer <= 0:
 		freeze_timer = FREEZE_COOLDOWN
