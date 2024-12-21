@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvqx0ai7kl6y5"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_y31qk"]
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "vision_ray", "enemy_sprite") groups=["Enemy"]]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_y31qk")
+animation_player = NodePath("AnimationPlayer")
+vision_ray = NodePath("VisionRay")
+enemy_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="VisionRay" type="RayCast2D" parent="."]
+
+[node name="ChangePositionTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 30.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="timeout" from="ChangePositionTimer" to="." method="_on_change_position_timer_timeout"]

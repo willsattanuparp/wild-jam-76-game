@@ -20,13 +20,15 @@ var attack_duration = 0.3
 
 var facing_right = true
 
-const FREEZE_COOLDOWN = 4.0
-var freeze_timer = 0.0
+#const FREEZE_COOLDOWN = 4.0
+#var freeze_timer = 0.0
+var freeze_counter = 4
+var freeze_counter_filled = 4
 
 var hearts = 10
 signal ui_heart_damage()
+signal update_clock_ui(value)
 signal game_over()
-
 signal special()
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
@@ -86,11 +88,10 @@ func _physics_process(delta: float) -> void:
 		can_attack = false
 		strike_hitbox.monitoring = true
 	#special - freeze
-	if Input.is_action_just_pressed("Special") and freeze_timer <= 0:
-		freeze_timer = FREEZE_COOLDOWN
+	if Input.is_action_just_pressed("Special") and freeze_counter == 4:
+		freeze_counter = 0
+		update_clock_ui.emit(freeze_counter)
 		special.emit()
-	elif freeze_timer > 0:
-		freeze_timer -= delta
 	#crouch
 	if Input.is_action_just_pressed("Crouch"):
 		crouch()
@@ -109,6 +110,11 @@ func crouch():
 
 func uncrouch():
 	pass
+
+func fill_time():
+	freeze_counter += 1
+	update_clock_ui.emit(freeze_counter)
+	clamp(freeze_counter,0,freeze_counter_filled)
 
 func flip_player(face_right):
 	facing_right = face_right

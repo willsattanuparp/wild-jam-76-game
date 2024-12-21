@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b05q8a5jxd3yi"]
+
+[ext_resource type="Texture2D" uid="uid://611wdr5ew2ow" path="res://Assets/Sprites/Projectiles/Clock.png" id="1_1bue0"]
+[ext_resource type="Script" path="res://Scripts/clock.gd" id="1_mc4og"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y4fun"]
+radius = 11.0
+
+[node name="Clock" type="Area2D"]
+collision_layer = 128
+script = ExtResource("1_mc4og")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("1_1bue0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y4fun")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

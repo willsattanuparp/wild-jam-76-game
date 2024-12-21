@@ -17,13 +17,13 @@ var local_position = 0
 @onready var jump_locations = jump_locations_holder.get_children()
 
 
-@export var burst_projectile: PackedScene
+@export var throw_scene: PackedScene
+@export var burst_scene: PackedScene
+@export var spiral_scene: PackedScene
+@export var consecutive_scene: PackedScene
 @export var burst_projectile_resource: Resource
-@export var throw_projectile: PackedScene
 @export var throw_projectile_resource: Resource
-@export var spiral_projectile: PackedScene
 @export var spiral_projectile_resource: Resource
-@export var consecutive_projectile: PackedScene
 @export var consecutive_projectile_resource: Resource
 @export var projectile_nodes_holder: Node2D
 
@@ -261,15 +261,15 @@ func detect_obstacle_in_front() -> bool:
 	return false
 
 
-func instantiate_projectile_scene(scene: PackedScene,res: Resource, point: Vector2 = Vector2.ZERO) -> Projectile:
-	if scene == null or res == null:
+func instantiate_projectile_scene(projectile_scene: PackedScene, res: Resource, point: Vector2 = Vector2.ZERO) -> Projectile:
+	if res == null:
 		return
-	var projectile = throw_projectile.instantiate() as Projectile
+	var projectile = projectile_scene.instantiate() as Projectile
 	initialize_spawning_projectile_from_resource(projectile,throw_projectile_resource)
 	return projectile
 
 func attack_throw(direction: Vector2,direct_at_player: bool, point: Vector2 = Vector2.ZERO):
-	var projectile = instantiate_projectile_scene(throw_projectile,throw_projectile_resource,point)
+	var projectile = instantiate_projectile_scene(throw_scene,throw_projectile_resource,point)
 	var attack_source = point if point != Vector2.ZERO else global_position
 	if direct_at_player:
 		projectile.velocity = (player.global_position - global_position).normalized()
@@ -282,7 +282,7 @@ func attack_burst(burst_number: int,point: Vector2 = Vector2.ZERO):
 	var angle_inc = TAU / burst_number
 	for i in burst_number:
 		var angle = angle_inc * i
-		var projectile = instantiate_projectile_scene(burst_projectile,burst_projectile_resource,point)
+		var projectile = instantiate_projectile_scene(burst_scene,burst_projectile_resource,point)
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position + point
 		#offset spawn-in so the collisions work
@@ -300,7 +300,7 @@ func attack_spiral(spiral_number: int, time_between_projectiles: float, point: V
 	var angle_inc = TAU / spiral_number
 	for i in spiral_number:
 		var angle = angle_inc * i
-		var projectile = instantiate_projectile_scene(spiral_projectile,spiral_projectile_resource,point)
+		var projectile = instantiate_projectile_scene(spiral_scene,spiral_projectile_resource,point)
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position + point
 		#offset spawn-in so the collisions work
@@ -316,7 +316,7 @@ func attack_spiral(spiral_number: int, time_between_projectiles: float, point: V
 		await get_tree().create_timer(time_between_projectiles).timeout
 
 func attack_consecutive(type: int,number_of_projectiles: int,direction: Vector2, time_between_projectiles: float, direct_at_player: bool, time_between_attacks: float, number_of_attacks: int, point: Vector2 = Vector2.ZERO):
-	var projectile = instantiate_projectile_scene(consecutive_projectile,consecutive_projectile_resource,point)
+	var projectile = instantiate_projectile_scene(consecutive_scene,consecutive_projectile_resource,point)
 	for i in number_of_attacks:
 		match type:
 			0:

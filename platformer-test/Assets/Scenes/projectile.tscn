@@ -3,12 +3,14 @@
 [ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_tcgen"]
 [ext_resource type="Texture2D" uid="uid://f0s5mdu3uewl" path="res://icon.svg" id="2_bwj5r"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_36tpw"]
-radius = 64.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_s78xq"]
+resource_local_to_scene = true
+radius = 9.05539
 
-[node name="Projectile" type="Area2D" node_paths=PackedStringArray("collision_shape", "collision_ray") groups=["Freezable", "Projectile"]]
+[node name="Projectile" type="Area2D" node_paths=PackedStringArray("proj_sprite", "collision_shape", "collision_ray") groups=["Freezable", "Projectile"]]
 collision_layer = 8
 script = ExtResource("1_tcgen")
+proj_sprite = NodePath("Sprite2D")
 collision_shape = NodePath("CollisionShape2D")
 collision_ray = NodePath("CollisionRay")
 
@@ -16,7 +18,7 @@ collision_ray = NodePath("CollisionRay")
 texture = ExtResource("2_bwj5r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_36tpw")
+shape = SubResource("CircleShape2D_s78xq")
 
 [node name="CollisionRay" type="RayCast2D" parent="."]
 collision_mask = 0

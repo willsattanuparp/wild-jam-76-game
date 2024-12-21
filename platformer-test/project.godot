@@ -88,6 +88,7 @@ Crouch={
 2d_physics/layer_5="Enemy"
 2d_physics/layer_6="TurnedProjectile"
 2d_physics/layer_7="Zone"
+2d_physics/layer_8="Powerups"
 
 [physics]
 

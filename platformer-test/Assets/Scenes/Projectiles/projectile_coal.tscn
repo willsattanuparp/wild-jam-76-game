@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6qvp6twasv4a"]
+
+[ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="1_3lm1y"]
+[ext_resource type="Texture2D" uid="uid://4q3o52qummxn" path="res://Assets/Sprites/Projectiles/Coal.png" id="2_63lhj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xvt2d"]
+resource_local_to_scene = true
+radius = 9.05539
+
+[node name="ProjectileCoal" instance=ExtResource("1_3lm1y")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(1, -8)
+texture = ExtResource("2_63lhj")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_xvt2d")

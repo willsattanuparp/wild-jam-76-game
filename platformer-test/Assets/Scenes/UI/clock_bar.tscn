@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dslsofn242cw8"]
+
+[ext_resource type="Script" path="res://Scripts/clock_bar.gd" id="1_0b5fd"]
+[ext_resource type="Texture2D" uid="uid://611wdr5ew2ow" path="res://Assets/Sprites/Projectiles/Clock.png" id="2_atp8w"]
+[ext_resource type="Texture2D" uid="uid://b6mkx1tfxfntf" path="res://Assets/Sprites/Projectiles/ClockTopLeft.png" id="3_5j2u7"]
+[ext_resource type="Texture2D" uid="uid://dnxvwuxdpnj8a" path="res://Assets/Sprites/Projectiles/ClockTopRight.png" id="4_am866"]
+[ext_resource type="Texture2D" uid="uid://crj53smvheam5" path="res://Assets/Sprites/Projectiles/ClockBotLeft.png" id="5_x4xsj"]
+[ext_resource type="Texture2D" uid="uid://br7q6e3bpmd8k" path="res://Assets/Sprites/Projectiles/ClockBotRight.png" id="6_q7mlv"]
+
+[node name="ClockBar" type="Node2D" node_paths=PackedStringArray("top_left", "top_right", "bot_left", "bot_right")]
+script = ExtResource("1_0b5fd")
+top_left = NodePath("TopLeft")
+top_right = NodePath("TopRight")
+bot_left = NodePath("BotLeft")
+bot_right = NodePath("BotRight")
+
+[node name="ClockBackground" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.27451)
+position = Vector2(0, -5)
+texture = ExtResource("2_atp8w")
+
+[node name="TopLeft" type="Sprite2D" parent="."]
+position = Vector2(-8, -10.5)
+texture = ExtResource("3_5j2u7")
+
+[node name="TopRight" type="Sprite2D" parent="."]
+position = Vector2(8, -10.5)
+texture = ExtResource("4_am866")
+
+[node name="BotLeft" type="Sprite2D" parent="."]
+position = Vector2(-8, 5.5)
+texture = ExtResource("5_x4xsj")
+
+[node name="BotRight" type="Sprite2D" parent="."]
+position = Vector2(8, 5.5)
+texture = ExtResource("6_q7mlv")

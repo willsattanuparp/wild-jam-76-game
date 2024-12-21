@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1byvhom0yvmm"]
+[gd_scene load_steps=10 format=3 uid="uid://b1byvhom0yvmm"]
 
 [ext_resource type="PackedScene" uid="uid://cvmwbdrqv3ylm" path="res://Assets/Scenes/UI/heart_bar.tscn" id="1_giufm"]
 [ext_resource type="Script" path="res://Scripts/level_ui.gd" id="1_il5n0"]
 [ext_resource type="FontFile" uid="uid://cx0trl8kduilf" path="res://Assets/Fonts/DePixelKlein.ttf" id="3_kvmjs"]
 [ext_resource type="Texture2D" uid="uid://fl3fr2rrauu1" path="res://Assets/Sprites/whitesquare.png" id="3_oactl"]
+[ext_resource type="PackedScene" uid="uid://dslsofn242cw8" path="res://Assets/Scenes/UI/clock_bar.tscn" id="4_qsjw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ijyke"]
 
@@ -17,7 +18,7 @@ border_color = Color(0.2, 0.152941, 0.101961, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm7ow"]
 bg_color = Color(0.580392, 0, 0.0156863, 1)
 
-[node name="Level_UI" type="Control" node_paths=PackedStringArray("heart_bar", "boss_bar")]
+[node name="Level_UI" type="Control" node_paths=PackedStringArray("heart_bar", "boss_bar", "clock_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,7 @@ grow_vertical = 2
 script = ExtResource("1_il5n0")
 heart_bar = NodePath("HeartBar")
 boss_bar = NodePath("BoxContainer/BossBar")
+clock_bar = NodePath("ClockBar")
 
 [node name="HeartBar" parent="." instance=ExtResource("1_giufm")]
 position = Vector2(576, 582)
@@ -38,6 +40,10 @@ material = SubResource("ShaderMaterial_ijyke")
 position = Vector2(575.5, 32)
 scale = Vector2(11.5375, 0.175)
 texture = ExtResource("3_oactl")
+
+[node name="ClockBar" parent="." instance=ExtResource("4_qsjw3")]
+position = Vector2(100, 159)
+scale = Vector2(3, 3)
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
 layout_mode = 1

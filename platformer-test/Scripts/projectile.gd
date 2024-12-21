@@ -1,7 +1,7 @@
 class_name Projectile extends Area2D
 
 
-
+@export var proj_sprite: Sprite2D
 @export var gravity_effect: float = 5.0
 @onready var current_gravity = gravity_effect
 
@@ -43,8 +43,8 @@ var recalculate_ray_frames = 6
 var freezing = false
 var frozen = false
 var unfreezing = false
-var freeze_rate = 500.0
-var unfreeze_rate = 500.0
+var freeze_rate = 800.0
+var unfreeze_rate = 800.0
 var initial_frozen_timer = 4.0
 var frozen_timer = initial_frozen_timer
 var gravity_freeze_rate = 0.0

@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=20 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
+[ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_5ix74"]
 [ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="2_ctt8u"]
 [ext_resource type="PackedScene" uid="uid://ciqkefpikuae8" path="res://Assets/Scenes/Enemies/enemy_tree.tscn" id="3_8la7n"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_target.gd" id="3_rkrim"]
 [ext_resource type="PackedScene" uid="uid://ekcws2r73mra" path="res://Assets/Scenes/Levels/LevelObjects/landing_point.tscn" id="3_umjnq"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/procam2d.gd" id="4_dgr4m"]
-[ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="4_hn7x0"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/nds/a.gd" id="5_5i5lx"]
+[ext_resource type="PackedScene" uid="uid://bpp8qkbuqwcth" path="res://Assets/Scenes/Projectiles/projectile_ornament.tscn" id="5_iieed"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="6_hf1du"]
 [ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="6_sjbbk"]
 [ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="7_yh47m"]
@@ -207,11 +208,18 @@ priority = 0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vbda"]
 size = Vector2(2000, 1200)
 
-[node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node", "projectile_holder_node")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tsoka"]
+size = Vector2(1301.5, 124)
+
+[node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area")]
 script = ExtResource("1_sm3ev")
 player = NodePath("Player")
 special_holder_node = NodePath("SpecialHolder")
 projectile_holder_node = NodePath("Projectiles")
+clock_holder_node = NodePath("ClockHolder")
+exit_area = NodePath("ExitArea")
+clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
+clock_scene = ExtResource("2_5ix74")
 
 [node name="Environment" type="TileMapLayer" parent="." groups=["Floor"]]
 tile_map_data = PackedByteArray("AAAAABAAAgANAAUAAAAAABEAAgANAAYAAAAAABIAAgANAAcAAAAAABMAAgANAAgAAAAAABQAAgANAAkAAAABABAAAgAOAAUAAAABABEAAgAOAAYAAAABABIAAgAOAAcAAAABABMAAgAOAAgAAAABABQAAgANAAkAAAACABAAAgAOAAUAAAACABEAAgAOAAYAAAACABIAAgAOAAcAAAACABMAAgAOAAgAAAACABQAAgANAAkAAAADABAAAgAOAAUAAAADABEAAgAOAAYAAAADABIAAgAOAAcAAAADABMAAgAOAAgAAAADABQAAgANAAkAAAAEABAAAgAOAAUAAAAEABEAAgAOAAYAAAAEABIAAgAOAAcAAAAEABMAAgAOAAgAAAAEABQAAgANAAkAAAAFABAAAgAOAAUAAAAFABEAAgAOAAYAAAAFABIAAgAOAAcAAAAFABMAAgAOAAgAAAAFABQAAgANAAkAAAAGABAAAgAOAAUAAAAGABEAAgAOAAYAAAAGABIAAgAOAAcAAAAGABMAAgAOAAgAAAAGABQAAgANAAkAAAAHABAAAgAOAAUAAAAHABEAAgAOAAYAAAAHABIAAgAOAAcAAAAHABMAAgAOAAgAAAAHABQAAgANAAkAAAAIABAAAgAOAAUAAAAIABEAAgAOAAYAAAAIABIAAgAOAAcAAAAIABMAAgAOAAgAAAAIABQAAgANAAkAAAAJABAAAgAOAAUAAAAJABEAAgAOAAYAAAAJABIAAgAOAAcAAAAJABMAAgAOAAgAAAAJABQAAgANAAkAAAAKABAAAgAOAAUAAAAKABEAAgAOAAYAAAAKABIAAgAOAAcAAAAKABMAAgAOAAgAAAAKABQAAgANAAkAAAALABAAAgAOAAUAAAALABEAAgAOAAYAAAALABIAAgAOAAcAAAALABMAAgAOAAgAAAALABQAAgANAAkAAAAMABAAAgAOAAUAAAAMABEAAgAOAAYAAAAMABIAAgAOAAcAAAAMABMAAgAOAAgAAAAMABQAAgANAAkAAAANABAAAgAOAAUAAAANABEAAgAOAAYAAAANABIAAgAOAAcAAAANABMAAgAOAAgAAAANABQAAgANAAkAAAAOABAAAgAOAAUAAAAOABEAAgAOAAYAAAAOABIAAgAOAAcAAAAOABMAAgAOAAgAAAAOABQAAgANAAkAAAAPABAAAgAOAAUAAAAPABEAAgAOAAYAAAAPABIAAgAOAAcAAAAPABMAAgAOAAgAAAAPABQAAgANAAkAAAAQABAAAgAOAAUAAAAQABEAAgAOAAYAAAAQABIAAgAOAAcAAAAQABMAAgAOAAgAAAAQABQAAgANAAkAAAARABAAAgAOAAUAAAARABEAAgAOAAYAAAARABIAAgAOAAcAAAARABMAAgAOAAgAAAARABQAAgANAAkAAAASABAAAgAOAAUAAAASABEAAgAOAAYAAAASABIAAgAOAAcAAAASABMAAgAOAAgAAAASABQAAgANAAkAAAATABAAAgAOAAUAAAATABEAAgAOAAYAAAATABIAAgAOAAcAAAATABMAAgAOAAgAAAATABQAAgANAAkAAAAUABAAAgAOAAUAAAAUABEAAgAOAAYAAAAUABIAAgAOAAcAAAAUABMAAgAOAAgAAAAUABQAAgANAAkAAAAVABAAAgAOAAUAAAAVABEAAgAOAAYAAAAVABIAAgAOAAcAAAAVABMAAgAOAAgAAAAVABQAAgANAAkAAAAWABAAAgAOAAUAAAAWABEAAgAOAAYAAAAWABIAAgAOAAcAAAAWABMAAgAOAAgAAAAWABQAAgANAAkAAAAXABAAAgAOAAUAAAAXABEAAgAOAAYAAAAXABIAAgAOAAcAAAAXABMAAgAOAAgAAAAXABQAAgANAAkAAAAYABAAAgAOAAUAAAAYABEAAgAOAAYAAAAYABIAAgAOAAcAAAAYABMAAgAOAAgAAAAYABQAAgANAAkAAAAZABAAAgAOAAUAAAAZABEAAgAOAAYAAAAZABIAAgAOAAcAAAAZABMAAgAOAAgAAAAZABQAAgANAAkAAAAaABAAAgAOAAUAAAAaABEAAgAOAAYAAAAaABIAAgAOAAcAAAAaABMAAgAOAAgAAAAaABQAAgANAAkAAAAbABAAAgAOAAUAAAAbABEAAgAOAAYAAAAbABIAAgAOAAcAAAAbABMAAgAOAAgAAAAbABQAAgANAAkAAAAcABAAAgAOAAUAAAAcABEAAgAOAAYAAAAcABIAAgAOAAcAAAAcABMAAgAOAAgAAAAcABQAAgANAAkAAAAdABAAAgAOAAUAAAAdABEAAgAOAAYAAAAdABIAAgAOAAcAAAAdABMAAgAOAAgAAAAdABQAAgANAAkAAAAeABAAAgAOAAUAAAAeABEAAgAOAAYAAAAeABIAAgAOAAcAAAAeABMAAgAOAAgAAAAeABQAAgANAAkAAAAfABAAAgAOAAUAAAAfABEAAgAOAAYAAAAfABIAAgAOAAcAAAAfABMAAgAOAAgAAAAfABQAAgANAAkAAAAgABAAAgAOAAUAAAAgABEAAgAOAAYAAAAgABIAAgAOAAcAAAAgABMAAgAOAAgAAAAgABQAAgANAAkAAAAhABAAAgAOAAUAAAAhABEAAgAOAAYAAAAhABIAAgAOAAcAAAAhABMAAgAOAAgAAAAhABQAAgANAAkAAAAiABAAAgAOAAUAAAAiABEAAgAOAAYAAAAiABIAAgAOAAcAAAAiABMAAgAOAAgAAAAiABQAAgANAAkAAAAjABAAAgAOAAUAAAAjABEAAgAOAAYAAAAjABIAAgAOAAcAAAAjABMAAgAOAAgAAAAjABQAAgANAAkAAAAkABAAAgAOAAUAAAAkABEAAgAOAAYAAAAkABIAAgAOAAcAAAAkABMAAgAOAAgAAAAkABQAAgANAAkAAAAlABAAAgAPAAUAAAAlABEAAgAPAAYAAAAlABIAAgAPAAcAAAAlABMAAgAPAAgAAAAlABQAAgANAAkAAAAHAA4AAgAQAAUAAAAIAA4AAgARAAUAAAAJAA4AAgASAAUAAAAVAA4AAgAQAAUAAAAWAA4AAgARAAUAAAAXAA4AAgASAAUAAAARAAYAAgAOAAMAAAAUAAYAAgAPAAMAAAAOAAYAAgANAAMAAAAPAAYAAgAOAAMAAAAQAAYAAgAOAAMAAAASAAYAAgAOAAMAAAATAAYAAgAOAAMAAAA=")
@@ -278,18 +286,20 @@ position = Vector2(78, -1)
 
 [node name="SpecialHolder" type="Node2D" parent="."]
 
+[node name="ClockHolder" type="Node2D" parent="."]
+
 [node name="EnemyTree" parent="." node_paths=PackedStringArray("player", "current_landing", "jump_locations_holder", "projectile_nodes_holder") instance=ExtResource("3_8la7n")]
 position = Vector2(1026, 481)
 player = NodePath("../Player")
 current_landing = NodePath("../JumpLocations/LowerRightLanding")
 jump_locations_holder = NodePath("../JumpLocations")
-burst_projectile = ExtResource("4_hn7x0")
+throw_scene = ExtResource("5_iieed")
+burst_scene = ExtResource("5_iieed")
+spiral_scene = ExtResource("5_iieed")
+consecutive_scene = ExtResource("5_iieed")
 burst_projectile_resource = SubResource("Resource_6v6ub")
-throw_projectile = ExtResource("4_hn7x0")
 throw_projectile_resource = SubResource("Resource_6v6ub")
-spiral_projectile = ExtResource("4_hn7x0")
 spiral_projectile_resource = SubResource("Resource_6v6ub")
-consecutive_projectile = ExtResource("4_hn7x0")
 consecutive_projectile_resource = SubResource("Resource_6v6ub")
 projectile_nodes_holder = NodePath("../Projectiles")
 
@@ -342,7 +352,7 @@ global_debug_draw = false
 [node name="ExitArea" type="Area2D" parent="."]
 position = Vector2(590, 350)
 collision_layer = 64
-collision_mask = 40
+collision_mask = 168
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
 shape = SubResource("RectangleShape2D_5vbda")
@@ -352,6 +362,12 @@ shape = SubResource("RectangleShape2D_5vbda")
 [node name="Level_UI" parent="UI" instance=ExtResource("7_yh47m")]
 metadata/_edit_use_anchors_ = true
 
-[connection signal="update_hp_bar" from="EnemyTree" to="UI/Level_UI" method="_on_enemy_tree_update_hp_bar"]
+[node name="ClockSpawner" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClockSpawner"]
+position = Vector2(650, -104)
+shape = SubResource("RectangleShape2D_tsoka")
+
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]
+[connection signal="update_clock_ui" from="Player" to="UI/Level_UI" method="_on_player_update_clock_ui"]
 [connection signal="area_exited" from="ExitArea" to="." method="_on_exit_area_area_exited"]
