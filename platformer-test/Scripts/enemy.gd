@@ -132,7 +132,7 @@ func attack_state_phase_one(delta):
 		var rand = randf()
 		if rand < 0.2:
 			print("throw")
-			attack_throw(Vector2.ZERO,true) 
+			attack_consecutive(0,0,Vector2.ZERO,1.2,true,.8,3) 
 		elif rand < 0.6:
 			print("spiral")
 			attack_spiral(8,.3)

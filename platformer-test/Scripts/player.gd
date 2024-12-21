@@ -105,6 +105,7 @@ func flip_player(face_right):
 	player_sprite.scale.x *= -1
 
 func damage():
+	print("damaging")
 	hearts -= 1
 	ui_heart_damage.emit()
 	if hearts <= 0:
