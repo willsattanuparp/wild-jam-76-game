@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_y31qk"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "vision_ray", "enemy_sprite")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "vision_ray", "enemy_sprite") groups=["Enemy"]]
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("1_y31qk")

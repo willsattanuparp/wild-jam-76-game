@@ -51,6 +51,7 @@ var initial_attack_timer: float = 5.0
 var attack_timer = initial_attack_timer
 
 signal victory()
+signal update_hp_bar(value)
 
 func _ready() -> void:
 	pacing_boundry = current_landing.get_boundries()
@@ -78,7 +79,7 @@ func _physics_process(delta: float) -> void:
 	movement_animations(4.0)
 	move_and_slide()
 
-func movement_animations(anim_speed):
+func movement_animations(_anim_speed):
 	pass
 
 func jump(jump_force,anim_speed):
@@ -86,7 +87,7 @@ func jump(jump_force,anim_speed):
 	velocity.y = jump_force
 	play_jump_animation(anim_speed)
 
-func play_jump_animation(anim_speed):
+func play_jump_animation(_anim_speed):
 	pass
 
 func attack_state_matcher(delta: float):
@@ -199,8 +200,6 @@ func attack_state_phase_final(delta):
 			pass 
 		else:
 			pass
-	if health <= 0:
-		victory.emit()
 
 #movement state methods
 func movement_state_idle(_delta):
@@ -330,8 +329,12 @@ func attack_consecutive(type: int,number_of_projectiles: int,direction: Vector2,
 				printerr("No type!")
 		await get_tree().create_timer(time_between_attacks).timeout
 
-
-
+func damage(value):
+	health -= value
+	clamp(health,0,100)
+	update_hp_bar.emit(health)
+	if health <= 0:
+		victory.emit()
 
 func flip_player(face_right):
 	facing_right = face_right
