@@ -1,5 +1,8 @@
 extends Enemy
 
+
+@export var throw_marker: Marker2D
+
 func _ready() -> void:
 	MAX_SPEED = 100
 
@@ -22,13 +25,10 @@ func movement_animations(anim_speed):
 				animation_player.speed_scale = -anim_speed
 			elif velocity.x < 0:
 				animation_player.speed_scale = anim_speed
+
+
+
 ##attack state methods
-#func attack_state_begin(delta: float):
-	#pass
-#
-#func movement_state_begin(delta: float):
-	#pass
-#
 #func attack_state_idle(delta):
 	#pass
 #

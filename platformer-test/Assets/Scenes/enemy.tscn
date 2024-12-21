@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_y31qk"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "vision_ray")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "vision_ray", "enemy_sprite")]
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("1_y31qk")
 animation_player = NodePath("AnimationPlayer")
 vision_ray = NodePath("VisionRay")
+enemy_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

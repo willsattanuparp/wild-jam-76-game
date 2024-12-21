@@ -11,6 +11,7 @@ class_name Projectile extends Area2D
 
 @export var affected_by_gravity: bool = false
 @export var bounces_off_floor: bool = false
+#@export var bounce_speed_dampen: float = 1.0
 @export var affected_by_hard_floor: bool = false
 @export var affected_by_soft_floor: bool = false
 var speed = initial_speed
@@ -130,6 +131,7 @@ func _physics_process(delta: float) -> void:
 	if is_moving:
 		projectile_move(delta)
 
+#TODO: change velocity to direction, this is inconsistent
 func projectile_move(delta: float):
 	position += velocity.normalized() * speed * delta
 	if affected_by_gravity:
@@ -161,6 +163,8 @@ func projectile_body_entered(body: Node2D):
 			#print("collide")
 			var collision_normal = collision_ray.get_collision_normal()
 			velocity = velocity.bounce(collision_normal)
+			#TODO: note that off freeze it goes back to normal velocity
+			#speed *= bounce_speed_dampen
 			calculate_ray()
 
 func star_explosion(number_of_projectiles: int,collide_on_floor: bool):
