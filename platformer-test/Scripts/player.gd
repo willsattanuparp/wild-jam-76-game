@@ -88,7 +88,7 @@ func _physics_process(delta: float) -> void:
 		can_attack = false
 		strike_hitbox.monitoring = true
 	#special - freeze
-	if Input.is_action_just_pressed("Special") and freeze_counter == 4:
+	if Input.is_action_just_pressed("Special") and freeze_counter >= 4:
 		freeze_counter = 0
 		update_clock_ui.emit(freeze_counter)
 		special.emit()
@@ -114,7 +114,7 @@ func uncrouch():
 func fill_time():
 	freeze_counter += 1
 	update_clock_ui.emit(freeze_counter)
-	clamp(freeze_counter,0,freeze_counter_filled)
+	freeze_counter = clamp(freeze_counter,0,freeze_counter_filled)
 
 func flip_player(face_right):
 	facing_right = face_right

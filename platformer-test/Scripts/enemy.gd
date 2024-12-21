@@ -331,7 +331,7 @@ func attack_consecutive(type: int,number_of_projectiles: int,direction: Vector2,
 
 func damage(value):
 	health -= value
-	clamp(health,0,100)
+	health = clamp(health,0,100)
 	update_hp_bar.emit(health)
 	if health <= 0:
 		victory.emit()

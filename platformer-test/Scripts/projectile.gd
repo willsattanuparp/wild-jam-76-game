@@ -81,7 +81,7 @@ func _on_body_entered(body: Node2D) -> void:
 		projectile_explode()
 	if body.is_in_group("Enemy"):
 		print("testdamage")
-		body.damage(4)
+		body.damage(5)
 
 func _process(delta: float) -> void:
 	#freezing logic

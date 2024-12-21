@@ -8,6 +8,7 @@ func _on_player_ui_heart_damage() -> void:
 	heart_bar.take_damage()
 
 func _on_enemy_tree_update_hp_bar(value: Variant) -> void:
+	print(value)
 	boss_bar.value = value
 
 

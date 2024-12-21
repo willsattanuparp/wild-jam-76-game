@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=21 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
 [ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_5ix74"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="6_sjbbk"]
 [ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="7_yh47m"]
 [ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="8_t0n4y"]
+[ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_room.gd" id="14_ptiat"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i5esj"]
 texture = ExtResource("8_t0n4y")
@@ -288,6 +289,13 @@ position = Vector2(78, -1)
 
 [node name="ClockHolder" type="Node2D" parent="."]
 
+[node name="PCamRoom" type="Node2D" parent="."]
+position = Vector2(585, 227)
+script = ExtResource("14_ptiat")
+room_size = Vector2(1400, 800)
+zoom = 1.0
+open_sides = 0
+
 [node name="EnemyTree" parent="." node_paths=PackedStringArray("player", "current_landing", "jump_locations_holder", "projectile_nodes_holder") instance=ExtResource("3_8la7n")]
 position = Vector2(1026, 481)
 player = NodePath("../Player")
@@ -368,6 +376,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(650, -104)
 shape = SubResource("RectangleShape2D_tsoka")
 
+[connection signal="update_hp_bar" from="EnemyTree" to="UI/Level_UI" method="_on_enemy_tree_update_hp_bar"]
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]
 [connection signal="update_clock_ui" from="Player" to="UI/Level_UI" method="_on_player_update_clock_ui"]
 [connection signal="area_exited" from="ExitArea" to="." method="_on_exit_area_area_exited"]
