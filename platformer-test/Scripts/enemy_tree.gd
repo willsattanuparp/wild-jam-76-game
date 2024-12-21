@@ -34,14 +34,14 @@ func attack_state_phase_one(delta):
 			await animation_player.animation_finished
 		elif rand < 0.6:
 			animation_player.play("tree_yell")
-			attack_spiral(24,.1)
+			attack_spiral(8,.3)
 		elif rand < 0.9:
 			animation_player.play("tree_yell")
 			attack_burst(16)
 		else:
 			animation_player.play("tree_yell")
 	if health < 70:
-		initial_attack_timer = 5.0
+		initial_attack_timer = 7.0
 		attack_timer = initial_attack_timer
 		change_attack_state(ATTACK_STATE.PHASE_TWO)
 
@@ -52,15 +52,18 @@ func attack_state_phase_two(delta):
 		attack_timer = initial_attack_timer
 		var rand = randf()
 		if rand < 0.2:
-			pass 
+			animation_player.play("tree_yell")
+			attack_spiral(16,.2)
 		if rand < 0.6:
-			pass 
+			animation_player.play("tree_yell")
+			attack_burst(20)
 		if rand < 0.9:
-			pass 
+			animation_player.play("tree_yell")
+			attack_consecutive(1,8,Vector2.ZERO,0,true,.7,3)
 		else:
-			pass
+			animation_player.play("tree_yell")
 	if health < 40:
-		initial_attack_timer = 5.0
+		initial_attack_timer = 7.0
 		attack_timer = initial_attack_timer
 		change_attack_state(ATTACK_STATE.PHASE_THREE)
 
@@ -71,13 +74,15 @@ func attack_state_phase_three(delta):
 		attack_timer = initial_attack_timer
 		var rand = randf()
 		if rand < 0.2:
-			pass 
+			animation_player.play("tree_yell")
+			attack_spiral(24,.1)
 		if rand < 0.6:
-			pass 
+			animation_player.play("tree_yell")
+			attack_consecutive(1,8,Vector2.ZERO,0,true,.7,3)
 		if rand < 0.9:
-			pass 
+			attack_consecutive(2,16,Vector2.ZERO,.1,true,1.6,3)
 		else:
-			pass
+			animation_player.play("tree_yell")
 	if health < 15:
 		initial_attack_timer = 5.0
 		attack_timer = initial_attack_timer
@@ -90,23 +95,24 @@ func attack_state_phase_final(delta):
 		attack_timer = initial_attack_timer
 		var rand = randf()
 		if rand < 0.2:
-			pass 
+			animation_player.play("tree_yell")
+			attack_spiral(30,.05)
 		if rand < 0.6:
-			pass 
+			attack_burst(30)
 		if rand < 0.9:
-			pass 
+			attack_consecutive(2,24,Vector2.ZERO,.1,true,2.4,3)
 		else:
-			pass
+			animation_player.play("tree_yell")
 func play_jump_animation(anim_speed):
 	animation_player.speed_scale = anim_speed
 	animation_player.play("tree_jump")
 
 func movement_animations(anim_speed):
 	if !jumping:
-		if direction.x != 0 and !(animation_player.is_playing() and (animation_player.current_animation == "tree_walk" or animation_player.current_animation == "tree_throw")):
+		if direction.x != 0 and !(animation_player.is_playing() and (animation_player.current_animation == "tree_walk" or animation_player.current_animation == "tree_throw" or animation_player.current_animation == "tree_yell")):
 			animation_player.speed_scale = anim_speed
 			animation_player.play("tree_walk")
-		elif direction.x == 0 and (animation_player.is_playing() and (animation_player.current_animation == "tree_walk" or animation_player.current_animation == "tree_throw")):
+		elif direction.x == 0 and (animation_player.is_playing() and (animation_player.current_animation == "tree_walk" or animation_player.current_animation == "tree_throw" or animation_player.current_animation == "tree_yell")):
 			animation_player.stop()
 		if animation_player.is_playing() and animation_player.current_animation == "tree_walk":
 			if velocity.x > 0:

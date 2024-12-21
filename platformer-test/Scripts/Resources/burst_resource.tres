@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://4hjkmi0ew01"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="1_hmsvi"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_hmsvi")
+initial_speed = 600
+velocity = Vector2(1, 0)
+gravity_effect = 5.0
+affected_by_gravity = false
+bounces_off_floor = false
+affected_by_hard_floor = false
+affected_by_soft_floor = false
+explodes_on_floor = false
+explode_from_timer = false
+explosion_timer = 4.0
+number_of_projectiles_in_explosion = 6

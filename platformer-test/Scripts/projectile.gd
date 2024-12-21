@@ -14,7 +14,7 @@ class_name Projectile extends Area2D
 #@export var bounce_speed_dampen: float = 1.0
 @export var affected_by_hard_floor: bool = false
 @export var affected_by_soft_floor: bool = false
-var speed = initial_speed
+@onready var speed = initial_speed
 
 #used to stop the main projectile after explosion
 var is_moving = true
@@ -45,7 +45,7 @@ var frozen = false
 var unfreezing = false
 var freeze_rate = 800.0
 var unfreeze_rate = 800.0
-var initial_frozen_timer = 4.0
+var initial_frozen_timer = 6.0
 var frozen_timer = initial_frozen_timer
 var gravity_freeze_rate = 0.0
 
@@ -93,6 +93,7 @@ func _process(delta: float) -> void:
 			speed = 0
 			current_gravity = 0
 		if speed == 0:
+			modulate = Color.DODGER_BLUE
 			freezing = false
 			frozen = true
 			#print("frozen")
@@ -101,6 +102,7 @@ func _process(delta: float) -> void:
 			frozen_timer -= delta
 		elif frozen_timer <= 0:
 			frozen_timer = initial_frozen_timer
+			modulate = Color.WHITE
 			unfreeze()
 	if unfreezing:
 		if speed < initial_speed:

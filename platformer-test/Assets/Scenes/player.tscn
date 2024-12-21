@@ -1,30 +1,31 @@
 [gd_scene load_steps=5 format=3 uid="uid://dq5rw3tkjsfom"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_n5ul1"]
-[ext_resource type="Texture2D" uid="uid://f0s5mdu3uewl" path="res://icon.svg" id="2_lpuvu"]
+[ext_resource type="Texture2D" uid="uid://cvhou5c2occ1v" path="res://Assets/Sprites/Character/Guy Main Walk-Sheet.png" id="2_qjm3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w3f0"]
-size = Vector2(32, 64)
+size = Vector2(21, 59)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3isn"]
 size = Vector2(32, 78)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("strike_hitbox", "player_sprite") groups=["Player"]]
-collision_mask = 6
+collision_mask = 262
 script = ExtResource("1_n5ul1")
 strike_hitbox = NodePath("StrikeHitbox")
 player_sprite = NodePath("PlayerSprite")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
-position = Vector2(0, 1.84774e-06)
-scale = Vector2(0.25, 0.5)
-texture = ExtResource("2_lpuvu")
+position = Vector2(-3, -15)
+texture = ExtResource("2_qjm3j")
+hframes = 25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_7w3f0")
 
 [node name="StrikeHitbox" type="Area2D" parent="."]
-position = Vector2(32, -7)
+position = Vector2(26, -7)
 collision_layer = 0
 collision_mask = 8
 monitoring = false

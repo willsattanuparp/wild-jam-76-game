@@ -47,7 +47,7 @@ var MAX_SPEED = 200
 
 var health = 100
 
-var initial_attack_timer: float = 5.0
+var initial_attack_timer: float = 10.0
 var attack_timer = initial_attack_timer
 
 signal victory()
