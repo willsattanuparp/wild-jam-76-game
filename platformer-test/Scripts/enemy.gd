@@ -37,6 +37,7 @@ var leaping = false
 var jumping = false
 
 var facing_right = false
+var flip_modifier = Vector2(-1,0)
 @export var enemy_sprite: Sprite2D
 
 var GRAVITY = 4000
@@ -232,7 +233,17 @@ func movement_state_change_position(_delta):
 		var marker = current_landing
 		#make sure it doesnt get the same landing, otherwise reroll
 		while marker == current_landing:
-			marker = jump_locations[randi() % jump_locations.size()]
+			var next_marker = null
+			var next_marker_id = marker.get_id_to_jump_to()
+			for i in jump_locations:
+				if i.id == next_marker_id:
+					next_marker = i
+			if next_marker == null:
+				printerr("next location not found")
+				return
+			else:
+				marker = next_marker
+			#marker = jump_locations[randi() % jump_locations.size()]
 		print(marker.id)
 		var pos_change_leap_time = current_landing.get_time_to_location(marker.id)
 		target_pos = marker.global_position
@@ -275,6 +286,8 @@ func attack_throw(direction: Vector2,direct_at_player: bool, point: Vector2 = Ve
 		projectile.velocity = (player.global_position - global_position).normalized()
 	else:
 		projectile.velocity = direction.normalized()
+		if facing_right:
+			projectile.velocity *= flip_modifier
 	projectile.position = attack_source
 	projectile_nodes_holder.add_child(projectile)
 
@@ -363,3 +376,4 @@ func initialize_spawning_projectile_from_resource(proj: Projectile, projectile_s
 	proj.number_of_projectiles_in_explosion = projectile_stats.number_of_projectiles_in_explosion
 	proj.projectile_scene = projectile_stats.projectile_scene
 	proj.projectile_stats = projectile_stats.projectile_stats
+	proj.rotation_rate = projectile_stats.rotation_rate

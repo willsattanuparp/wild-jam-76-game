@@ -16,3 +16,4 @@ extends Resource
 @export var number_of_projectiles_in_explosion: int = 6
 @export var projectile_scene :PackedScene
 @export var projectile_stats :Resource
+@export var rotation_rate: int = 100

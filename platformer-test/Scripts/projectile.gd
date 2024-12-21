@@ -49,6 +49,7 @@ var initial_frozen_timer = 6.0
 var frozen_timer = initial_frozen_timer
 var gravity_freeze_rate = 0.0
 
+@export var rotation_rate = 100
 
 func _ready() -> void:
 	calculate_ray()
@@ -94,6 +95,7 @@ func _process(delta: float) -> void:
 			current_gravity = 0
 		if speed == 0:
 			modulate = Color.DODGER_BLUE
+			set_collision_mask_value(1,false)
 			freezing = false
 			frozen = true
 			#print("frozen")
@@ -102,6 +104,7 @@ func _process(delta: float) -> void:
 			frozen_timer -= delta
 		elif frozen_timer <= 0:
 			frozen_timer = initial_frozen_timer
+			set_collision_mask_value(1,true)
 			modulate = Color.WHITE
 			unfreeze()
 	if unfreezing:
@@ -132,6 +135,8 @@ func _process(delta: float) -> void:
 			#able_to_explode_timer -= delta
 		#elif able_to_explode_timer <= 0:
 			#can_star_explode = true
+	if rotation_rate != 0:
+		rotation_degrees += rotation_rate * delta
 
 func _physics_process(delta: float) -> void:
 	if is_moving:
@@ -225,3 +230,4 @@ func initialize_spawning_projectile_from_resource(proj: Projectile):
 	proj.number_of_projectiles_in_explosion = projectile_stats.number_of_projectiles_in_explosion
 	proj.projectile_scene = projectile_stats.projectile_scene
 	proj.projectile_stats = projectile_stats.projectile_stats
+	proj.rotation_rate = projectile_stats.rotation_rate

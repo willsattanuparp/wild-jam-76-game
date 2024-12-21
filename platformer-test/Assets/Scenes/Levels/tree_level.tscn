@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=24 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
 [ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_5ix74"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="7_yh47m"]
 [ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="8_t0n4y"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_room.gd" id="14_ptiat"]
+[ext_resource type="Texture2D" uid="uid://ba2pvlbaf3muw" path="res://Assets/Sprites/Backgrounds/Parallax_Trees.png" id="15_qpd07"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8ugeb"]
 texture = ExtResource("8_t0n4y")
@@ -184,7 +185,7 @@ script = ExtResource("6_sjbbk")
 initial_speed = 300
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
-affected_by_gravity = true
+affected_by_gravity = false
 bounces_off_floor = false
 affected_by_hard_floor = false
 affected_by_soft_floor = false
@@ -192,6 +193,7 @@ explodes_on_floor = false
 explode_from_timer = false
 explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
+rotation_rate = 100
 
 [sub_resource type="Resource" id="Resource_u3ojo"]
 script = ExtResource("6_hf1du")
@@ -228,6 +230,11 @@ exit_area = NodePath("ExitArea")
 clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
 clock_scene = ExtResource("2_5ix74")
 
+[node name="Background3" type="Sprite2D" parent="."]
+position = Vector2(708, 68)
+scale = Vector2(6, 6)
+texture = ExtResource("15_qpd07")
+
 [node name="Background" type="TileMapLayer" parent="." groups=["Floor"]]
 tile_map_data = PackedByteArray("AAAEAA4AAgAFAAYAAAAEAA8AAgAFAAcAAAAMAA4AAgAFAAYAAAAMAA8AAgAFAAcAAAAcAA4AAgAFAAYAAAAcAA8AAgAFAAcAAAAFAA4AAgAHAAYAAAAFAA8AAgAHAAcAAAAZAA4AAgAHAAYAAAAZAA8AAgAHAAcAAAAGAA4AAgACAAgAAAAGAA8AAgACAAkAAAAHAA4AAgADAAYAAAAHAA8AAgADAAcAAAAVAA4AAgADAAYAAAAVAA8AAgADAAcAAAADAA4AAgABAAgAAAADAA8AAgABAAkAAAAIAA4AAgAFAAYAAAAIAA8AAgAFAAcAAAAYAA4AAgAHAAgAAAAYAA8AAgAHAAkAAAATAA4AAgAFAAgAAAATAA8AAgAFAAkAAAASAA4AAgAEAAgAAAASAA8AAgAEAAkAAAA=")
 tile_set = SubResource("TileSet_inq6g")
@@ -250,6 +257,7 @@ time_to_jump_here_from_id = {
 1: 1.5,
 2: 3.0
 }
+ids_can_jump_to = [1, 2]
 
 [node name="LeftBound" type="Marker2D" parent="JumpLocations/LowerRightLanding"]
 position = Vector2(-85, 1)
@@ -266,6 +274,7 @@ time_to_jump_here_from_id = {
 0: 1.5,
 2: 1.5
 }
+ids_can_jump_to = [0, 2]
 
 [node name="LeftBound" type="Marker2D" parent="JumpLocations/MiddleUpperLanding"]
 position = Vector2(-85, 1)
@@ -282,6 +291,7 @@ time_to_jump_here_from_id = {
 0: 3.0,
 1: 1.5
 }
+ids_can_jump_to = [0, 1]
 
 [node name="LeftBound" type="Marker2D" parent="JumpLocations/LowerLeftLanding"]
 position = Vector2(-89, -1)
@@ -396,7 +406,7 @@ collision_layer = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWallRight"]
 shape = SubResource("RectangleShape2D_d12g1")
 
-[connection signal="update_hp_bar" from="EnemyTree" to="UI/Level_UI" method="_on_enemy_tree_update_hp_bar"]
+[connection signal="update_hp_bar" from="EnemyTree" to="UI/Level_UI" method="_on_enemy_update_hp_bar"]
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]
 [connection signal="update_clock_ui" from="Player" to="UI/Level_UI" method="_on_player_update_clock_ui"]
 [connection signal="area_exited" from="ExitArea" to="." method="_on_exit_area_area_exited"]

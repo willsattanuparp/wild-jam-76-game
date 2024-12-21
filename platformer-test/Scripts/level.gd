@@ -14,7 +14,7 @@ class_name Level extends Node2D
 @onready var spawn_area = clock_spawn_area.shape.extents
 @onready var origin = clock_spawn_area.global_position - spawn_area
 
-var initial_clock_spawn_timer = 5.0
+var initial_clock_spawn_timer = 3.0
 var clock_spawn_timer = initial_clock_spawn_timer
 
 #var test_shake : PCamShake 
