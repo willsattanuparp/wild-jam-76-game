@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=18 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
 [ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="2_ctt8u"]
@@ -204,6 +204,9 @@ endless = false
 enabled = true
 priority = 0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vbda"]
+size = Vector2(2000, 1200)
+
 [node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node", "projectile_holder_node")]
 script = ExtResource("1_sm3ev")
 player = NodePath("Player")
@@ -294,8 +297,9 @@ projectile_nodes_holder = NodePath("../Projectiles")
 script = ExtResource("3_rkrim")
 radius = 100.0
 
-[node name="Player" parent="." instance=ExtResource("2_ctt8u")]
+[node name="Player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("2_ctt8u")]
 position = Vector2(495, 448)
+enemy = NodePath("../EnemyTree")
 
 [node name="PCamTarget" type="Node2D" parent="Player"]
 script = ExtResource("3_rkrim")
@@ -335,9 +339,18 @@ use_v_margins = false
 working_radius = 2000.0
 global_debug_draw = false
 
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(590, 350)
+collision_layer = 64
+collision_mask = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("RectangleShape2D_5vbda")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Level_UI" parent="UI" instance=ExtResource("7_yh47m")]
 metadata/_edit_use_anchors_ = true
 
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]
+[connection signal="area_exited" from="ExitArea" to="." method="_on_exit_area_area_exited"]

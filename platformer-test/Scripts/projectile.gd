@@ -49,6 +49,7 @@ var initial_frozen_timer = 4.0
 var frozen_timer = initial_frozen_timer
 var gravity_freeze_rate = 0.0
 
+
 func _ready() -> void:
 	calculate_ray()
 	if affected_by_hard_floor:
@@ -78,6 +79,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		body.damage()
 		projectile_explode()
+	if body.is_in_group("Enemy"):
+		body.damage()
 
 func _process(delta: float) -> void:
 	#freezing logic
@@ -192,6 +195,15 @@ func star_explosion(number_of_projectiles: int,collide_on_floor: bool):
 
 func calculate_ray():
 	collision_ray.target_position = velocity.normalized() * raycast_length
+
+func send_back(from: Vector2,to: Vector2, send_back_speed: int):
+	velocity = (to - from).normalized()
+	affected_by_gravity = false
+	speed = send_back_speed
+	set_collision_layer_value(4,false)
+	set_collision_layer_value(6,true)
+	set_collision_mask_value(1,false)
+	set_collision_mask_value(5,true)
 
 func initialize_spawning_projectile_from_resource(proj: Projectile):
 	proj.initial_speed = projectile_stats.initial_speed

@@ -12,6 +12,7 @@ var coyote_time = 0.2
 
 @export var strike_hitbox: Area2D
 @export var player_sprite: Sprite2D
+@export var enemy: Enemy
 
 var can_attack: bool = true
 var attack_duration = 0.3
@@ -90,7 +91,11 @@ func _physics_process(delta: float) -> void:
 		special.emit()
 	elif freeze_timer > 0:
 		freeze_timer -= delta
-		
+	#crouch
+	if Input.is_action_just_pressed("Crouch"):
+		crouch()
+	elif Input.is_action_just_released("Crouch"):
+		uncrouch()
 	#directional logic
 	if velocity.x != 0:
 		if velocity.x > 0 and !facing_right:
@@ -98,6 +103,12 @@ func _physics_process(delta: float) -> void:
 		elif velocity.x < 0 and facing_right:
 			flip_player(false)
 	move_and_slide()
+
+func crouch():
+	pass
+
+func uncrouch():
+	pass
 
 func flip_player(face_right):
 	facing_right = face_right
@@ -111,3 +122,8 @@ func damage():
 	if hearts <= 0:
 		print("game over")
 		game_over.emit()
+
+
+func _on_strike_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Projectile") and area.frozen:
+		area.send_back(global_position,enemy.global_position, 1200)

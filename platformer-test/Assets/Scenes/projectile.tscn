@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_36tpw"]
 radius = 64.0
 
-[node name="Projectile" type="Area2D" node_paths=PackedStringArray("collision_shape", "collision_ray") groups=["Freezable"]]
+[node name="Projectile" type="Area2D" node_paths=PackedStringArray("collision_shape", "collision_ray") groups=["Freezable", "Projectile"]]
 collision_layer = 8
 script = ExtResource("1_tcgen")
 collision_shape = NodePath("CollisionShape2D")
