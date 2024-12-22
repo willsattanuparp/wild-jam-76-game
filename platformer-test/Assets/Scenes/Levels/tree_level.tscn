@@ -212,7 +212,7 @@ priority = 0
 size = Vector2(2000, 1200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsoka"]
-size = Vector2(1301.5, 124)
+size = Vector2(1393, 124)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4vc2"]
 size = Vector2(164, 855)
@@ -389,7 +389,7 @@ metadata/_edit_use_anchors_ = true
 [node name="ClockSpawner" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClockSpawner"]
-position = Vector2(650, -104)
+position = Vector2(583.5, -104)
 shape = SubResource("RectangleShape2D_tsoka")
 
 [node name="InvisibleWallLeft" type="StaticBody2D" parent="."]

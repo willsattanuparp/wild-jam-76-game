@@ -3,15 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://bhid0pwovjr01" path="res://Assets/Scenes/projectile.tscn" id="1_i3knh"]
 [ext_resource type="Texture2D" uid="uid://rrqxi2oywm63" path="res://Assets/Sprites/Projectiles/Present.png" id="2_v0b3i"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5h2p"]
-size = Vector2(22, 22)
+[sub_resource type="CircleShape2D" id="CircleShape2D_6m2ct"]
+radius = 12.0
 
 [node name="ProjectilePresent" instance=ExtResource("1_i3knh")]
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -7)
+position = Vector2(0, -5)
 texture = ExtResource("2_v0b3i")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_p5h2p")
+shape = SubResource("CircleShape2D_6m2ct")

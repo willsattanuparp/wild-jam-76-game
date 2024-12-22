@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2u7hb"]
 radius = 29.0
-height = 114.0
+height = 104.0
 
 [sub_resource type="Animation" id="Animation_77wio"]
 length = 0.001
@@ -106,7 +106,7 @@ hframes = 29
 frame = 1
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, -5)
+position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_2u7hb")
 
 [node name="AnimationPlayer" parent="." index="4"]
