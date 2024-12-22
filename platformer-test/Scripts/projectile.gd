@@ -231,3 +231,7 @@ func initialize_spawning_projectile_from_resource(proj: Projectile):
 	proj.projectile_scene = projectile_stats.projectile_scene
 	proj.projectile_stats = projectile_stats.projectile_stats
 	proj.rotation_rate = projectile_stats.rotation_rate
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		queue_free()
