@@ -13,13 +13,14 @@ var coyote_time = 0.2
 @export var strike_hitbox: Area2D
 @export var player_sprite: Sprite2D
 @export var enemy: Enemy
+@export var anim_player: AnimationPlayer
 
 var can_attack: bool = true
 var attack_duration = 0.3
 @onready var attack_timer = attack_duration
 
 var facing_right = true
-
+var is_crouching = false
 #const FREEZE_COOLDOWN = 4.0
 #var freeze_timer = 0.0
 var freeze_counter = 4
@@ -64,20 +65,22 @@ func _physics_process(delta: float) -> void:
 	#left/right input
 	#if direction.x != 0:
 		#velocity.x = lerp(velocity.x, direction.x * MAX_SPEED, ACCELERATION * delta)
-	velocity.x = lerp(velocity.x, direction.x * MAX_SPEED, ACCELERATION * delta if direction.x != 0 else FRICTION * delta)
-	velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+	if !is_crouching:
+		velocity.x = lerp(velocity.x, direction.x * MAX_SPEED, ACCELERATION * delta if direction.x != 0 else FRICTION * delta)
+		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 	#else:
 		#velocity.x = lerp(velocity.x, 0.0, FRICTION * delta)
 	#jumping
-	if Input.is_action_just_pressed("Jump") and Input.is_action_pressed("Down"):
+	if Input.is_action_just_pressed("Jump") and (Input.is_action_pressed("Down") or is_crouching):
 		position.y += 1
-	elif Input.is_action_just_pressed("Jump") and coyote_timer > 0:#is_on_floor():
+	elif Input.is_action_just_pressed("Jump") and coyote_timer > 0 and !is_crouching:#is_on_floor():
 		velocity.y = JUMP_FORCE
 		coyote_timer = 0
 	#logic if moving upwards
 	if velocity.y < 0:
 		#variable jump height
 		if Input.is_action_pressed("Jump"):#is_on_floor():
+			anim_player.play("player_jump")
 			velocity.y  += JUMP_FORCE * delta * VARIABLE_JUMP_MULTIPLIER
 		#cancel momentum if head bumps ceiling
 		if is_on_ceiling():
@@ -85,6 +88,7 @@ func _physics_process(delta: float) -> void:
 	
 	#strike
 	if Input.is_action_just_pressed("Attack") and can_attack:
+		anim_player.play("player_attack")
 		can_attack = false
 		strike_hitbox.monitoring = true
 	#special - freeze
@@ -98,18 +102,33 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("Crouch"):
 		uncrouch()
 	#directional logic
+	#print(velocity.x)
 	if velocity.x != 0:
+		if !anim_player.is_playing() and is_on_floor():
+			anim_player.play("player_walk")
 		if velocity.x > 0 and !facing_right:
 			flip_player(true)
 		elif velocity.x < 0 and facing_right:
 			flip_player(false)
+		if abs(velocity.x) < 1:
+			velocity.x = 0
+	elif anim_player.is_playing() and anim_player.current_animation == "player_walk":
+		#print("test")
+		anim_player.stop()
 	move_and_slide()
 
 func crouch():
-	pass
+	is_crouching = true
+	velocity.x = 0
+	$PlayerSprite.frame = 22
+	$StandingCollision.disabled = true
+	$CrouchingCollision.disabled = false
 
 func uncrouch():
-	pass
+	is_crouching = false
+	$PlayerSprite.frame = 0
+	$StandingCollision.disabled = false
+	$CrouchingCollision.disabled = true
 
 func fill_time():
 	freeze_counter += 1
