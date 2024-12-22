@@ -1,12 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2vpajvqwl6wy"]
+[gd_scene load_steps=16 format=3 uid="uid://b2vpajvqwl6wy"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_cgusu"]
 [ext_resource type="Texture2D" uid="uid://wlvm2g7xhapr" path="res://Assets/Sprites/UI/PlayButton.png" id="2_8ek8d"]
+[ext_resource type="Texture2D" uid="uid://c2iswuo35ycoa" path="res://Assets/Sprites/UI/Menu Screen.png" id="2_q0275"]
 [ext_resource type="Texture2D" uid="uid://bh3lkavyyj4d4" path="res://Assets/Sprites/UI/OptionsButton.png" id="3_ev3rq"]
 [ext_resource type="Texture2D" uid="uid://ynu50tn8xhbg" path="res://Assets/Sprites/UI/TutorialButton.png" id="4_ap7rd"]
 [ext_resource type="Texture2D" uid="uid://bmb4qekwxtfj6" path="res://Assets/Sprites/UI/QuitButton.png" id="5_rk2s8"]
 [ext_resource type="Texture2D" uid="uid://dvl4m6tmn5nq4" path="res://Assets/Sprites/UI/ArrowLeft.png" id="6_bj5ks"]
 [ext_resource type="Texture2D" uid="uid://dgowjogogmv0j" path="res://Assets/Sprites/UI/ArrowRight.png" id="7_8qv8o"]
+[ext_resource type="Texture2D" uid="uid://bary2mcf41rdm" path="res://Assets/Sprites/Character/Enemies/Tree Golem-Sheet.png" id="8_xi18s"]
+[ext_resource type="Texture2D" uid="uid://dpgjofy08ikph" path="res://Assets/Sprites/Character/Enemies/Santa-Sheet.png" id="9_vn1q0"]
+[ext_resource type="Texture2D" uid="uid://dw8gxnjbbr7ck" path="res://Assets/Sprites/Character/Enemies/Deer-Sheet.png" id="10_6ubd7"]
+[ext_resource type="Texture2D" uid="uid://fl3fr2rrauu1" path="res://Assets/Sprites/whitesquare.png" id="12_4tfgv"]
+
+[sub_resource type="Animation" id="Animation_upnkj"]
+resource_name = "MenuAnim"
+length = 1.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuScreen:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_fhcs5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MenuScreen:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_588kn"]
+_data = {
+"MenuAnim": SubResource("Animation_upnkj"),
+"RESET": SubResource("Animation_fhcs5")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -18,6 +62,12 @@ offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cgusu")
+
+[node name="MenuScreen" type="Sprite2D" parent="."]
+position = Vector2(592, 322)
+scale = Vector2(3.6, 3.6)
+texture = ExtResource("2_q0275")
+hframes = 6
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -51,6 +101,7 @@ icon = ExtResource("5_rk2s8")
 flat = true
 
 [node name="LevelSelect" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -90,6 +141,61 @@ offset_top = 567.0
 offset_right = 722.0
 offset_bottom = 598.0
 text = "Back"
+
+[node name="Figures" type="Node2D" parent="."]
+position = Vector2(-56, -90)
+
+[node name="Deer" type="Node2D" parent="Figures"]
+
+[node name="Deer" type="Sprite2D" parent="Figures/Deer"]
+position = Vector2(216, 323)
+texture = ExtResource("10_6ubd7")
+hframes = 29
+
+[node name="Top" type="Marker2D" parent="Figures/Deer"]
+position = Vector2(216, 261)
+
+[node name="Default" type="Marker2D" parent="Figures/Deer"]
+position = Vector2(216, 324)
+
+[node name="Santa" type="Node2D" parent="Figures"]
+
+[node name="Santa" type="Sprite2D" parent="Figures/Santa"]
+position = Vector2(335, 322)
+texture = ExtResource("9_vn1q0")
+hframes = 26
+
+[node name="Top" type="Marker2D" parent="Figures/Santa"]
+position = Vector2(335, 255)
+
+[node name="Default" type="Marker2D" parent="Figures/Santa"]
+position = Vector2(335, 321)
+
+[node name="Tree" type="Node2D" parent="Figures"]
+
+[node name="Tree" type="Sprite2D" parent="Figures/Tree"]
+position = Vector2(443, 321)
+texture = ExtResource("8_xi18s")
+hframes = 33
+frame = 1
+
+[node name="Top" type="Marker2D" parent="Figures/Tree"]
+position = Vector2(443, 255)
+
+[node name="Default" type="Marker2D" parent="Figures/Tree"]
+position = Vector2(443, 321)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_588kn")
+}
+autoplay = "MenuAnim"
+
+[node name="BlackTransition" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(546, 148)
+scale = Vector2(20, 20)
+texture = ExtResource("12_4tfgv")
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]

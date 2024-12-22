@@ -49,6 +49,9 @@ var initial_frozen_timer = 6.0
 var frozen_timer = initial_frozen_timer
 var gravity_freeze_rate = 0.0
 
+var infinite_bouncing_timer_initial = 6.0
+var infinite_bouncing_timer = infinite_bouncing_timer_initial
+
 @export var rotation_rate = 100
 
 func _ready() -> void:
@@ -150,6 +153,16 @@ func projectile_move(delta: float):
 	#print(velocity)
 	if !frozen and recalculate_ray_counter % recalculate_ray_frames == 0:
 		calculate_ray()
+	#prevent bouncing forever
+	if abs(velocity.x) < .1:
+		velocity.x = 0
+	if velocity.x == 0:
+		if infinite_bouncing_timer > 0 and bounces_off_floor:
+			infinite_bouncing_timer -= delta
+		elif bounces_off_floor:
+			queue_free()
+	else:
+		infinite_bouncing_timer = infinite_bouncing_timer_initial
 	recalculate_ray_counter += 1
 
 func projectile_explode():
@@ -173,7 +186,7 @@ func projectile_body_entered(body: Node2D):
 		#print(bounces_off_floor)
 		#print(collision_ray.is_colliding())
 		if bounces_off_floor and collision_ray.is_colliding() and collision_ray.get_collider().is_in_group("Floor"):
-			print("collide")
+			#print("collide")
 			var collision_normal = collision_ray.get_collision_normal()
 			velocity = velocity.bounce(collision_normal)
 			#TODO: note that off freeze it goes back to normal velocity

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=33 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
 [ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_5ix74"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dhcbuiq6v7s6t" path="res://Assets/Scenes/UI/pause_menu.tscn" id="16_hfhrq"]
 [ext_resource type="PackedScene" uid="uid://b1jl4bi5f16yr" path="res://Assets/Scenes/UI/game_over_screen.tscn" id="17_h7vef"]
 [ext_resource type="PackedScene" uid="uid://cvackp5pqvutj" path="res://Assets/Scenes/UI/victory_screen.tscn" id="18_abpct"]
+[ext_resource type="Texture2D" uid="uid://fl3fr2rrauu1" path="res://Assets/Sprites/whitesquare.png" id="19_md7ef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8ugeb"]
 texture = ExtResource("8_t0n4y")
@@ -182,7 +183,7 @@ physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_8ugeb")
 
-[sub_resource type="Resource" id="Resource_27wxg"]
+[sub_resource type="Resource" id="Resource_eh7b8"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 300
@@ -200,7 +201,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_dx1d3"]
+[sub_resource type="Resource" id="Resource_oeg5j"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 300
@@ -217,10 +218,10 @@ explode_from_timer = true
 explosion_timer = 2.0
 number_of_projectiles_in_explosion = 5
 projectile_scene = ExtResource("5_iieed")
-projectile_stats = SubResource("Resource_27wxg")
+projectile_stats = SubResource("Resource_eh7b8")
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_vk04k"]
+[sub_resource type="Resource" id="Resource_e4ygp"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 600
@@ -238,7 +239,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_rnwq0"]
+[sub_resource type="Resource" id="Resource_5l2qn"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 300
@@ -255,10 +256,10 @@ explode_from_timer = true
 explosion_timer = 2.0
 number_of_projectiles_in_explosion = 4
 projectile_scene = ExtResource("5_iieed")
-projectile_stats = SubResource("Resource_vk04k")
+projectile_stats = SubResource("Resource_e4ygp")
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_pkw4r"]
+[sub_resource type="Resource" id="Resource_218an"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 300
@@ -275,10 +276,10 @@ explode_from_timer = true
 explosion_timer = 2.0
 number_of_projectiles_in_explosion = 4
 projectile_scene = ExtResource("5_iieed")
-projectile_stats = SubResource("Resource_rnwq0")
+projectile_stats = SubResource("Resource_5l2qn")
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_8ix7e"]
+[sub_resource type="Resource" id="Resource_edx5x"]
 resource_local_to_scene = true
 script = ExtResource("6_sjbbk")
 initial_speed = 300
@@ -321,7 +322,7 @@ size = Vector2(164, 855)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d12g1"]
 size = Vector2(231, 798.5)
 
-[node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "enemy", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area", "pause_menu")]
+[node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "enemy", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area", "pause_menu", "black_transition")]
 script = ExtResource("1_sm3ev")
 player = NodePath("Player")
 enemy = NodePath("EnemyTree")
@@ -332,6 +333,7 @@ exit_area = NodePath("ExitArea")
 clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
 clock_scene = ExtResource("2_5ix74")
 pause_menu = NodePath("UI/PauseMenu")
+black_transition = NodePath("BlackTransition")
 
 [node name="Background3" type="Sprite2D" parent="."]
 position = Vector2(708, 68)
@@ -424,10 +426,10 @@ throw_scene = ExtResource("5_iieed")
 burst_scene = ExtResource("5_iieed")
 spiral_scene = ExtResource("5_iieed")
 consecutive_scene = ExtResource("5_iieed")
-burst_projectile_resource = SubResource("Resource_dx1d3")
-throw_projectile_resource = SubResource("Resource_pkw4r")
-spiral_projectile_resource = SubResource("Resource_27wxg")
-consecutive_projectile_resource = SubResource("Resource_8ix7e")
+burst_projectile_resource = SubResource("Resource_oeg5j")
+throw_projectile_resource = SubResource("Resource_218an")
+spiral_projectile_resource = SubResource("Resource_eh7b8")
+consecutive_projectile_resource = SubResource("Resource_edx5x")
 projectile_nodes_holder = NodePath("../Projectiles")
 
 [node name="PCamTarget" type="Node2D" parent="EnemyTree"]
@@ -489,14 +491,17 @@ shape = SubResource("RectangleShape2D_5vbda")
 [node name="Level_UI" parent="UI" instance=ExtResource("7_yh47m")]
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("16_hfhrq")]
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("black_transition") instance=ExtResource("16_hfhrq")]
 visible = false
+black_transition = NodePath("../../BlackTransition")
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource("17_h7vef")]
+[node name="GameOverScreen" parent="UI" node_paths=PackedStringArray("black_transition") instance=ExtResource("17_h7vef")]
 visible = false
+black_transition = NodePath("../../BlackTransition")
 
-[node name="VictoryScreen" parent="UI" instance=ExtResource("18_abpct")]
+[node name="VictoryScreen" parent="UI" node_paths=PackedStringArray("black_transition") instance=ExtResource("18_abpct")]
 visible = false
+black_transition = NodePath("../../BlackTransition")
 
 [node name="ClockSpawner" type="Area2D" parent="."]
 
@@ -517,6 +522,12 @@ collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWallRight"]
 shape = SubResource("RectangleShape2D_d12g1")
+
+[node name="BlackTransition" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(571, 294)
+scale = Vector2(40, 40)
+texture = ExtResource("19_md7ef")
 
 [connection signal="update_hp_bar" from="EnemyTree" to="UI/Level_UI" method="_on_enemy_update_hp_bar"]
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]

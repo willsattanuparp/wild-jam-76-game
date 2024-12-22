@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://ddicdvht4pvaw"]
+[gd_scene load_steps=31 format=4 uid="uid://ddicdvht4pvaw"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_amc2g"]
 [ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_uthra"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dhcbuiq6v7s6t" path="res://Assets/Scenes/UI/pause_menu.tscn" id="14_sj873"]
 [ext_resource type="PackedScene" uid="uid://b1jl4bi5f16yr" path="res://Assets/Scenes/UI/game_over_screen.tscn" id="16_pjhxg"]
 [ext_resource type="PackedScene" uid="uid://cvackp5pqvutj" path="res://Assets/Scenes/UI/victory_screen.tscn" id="17_panfn"]
+[ext_resource type="Texture2D" uid="uid://fl3fr2rrauu1" path="res://Assets/Sprites/whitesquare.png" id="19_xqswb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01idd"]
 texture = ExtResource("3_27vw4")
@@ -182,7 +183,7 @@ physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_01idd")
 
-[sub_resource type="Resource" id="Resource_la0a7"]
+[sub_resource type="Resource" id="Resource_wda0i"]
 resource_local_to_scene = true
 script = ExtResource("7_i6vjd")
 initial_speed = 600
@@ -200,7 +201,7 @@ explosion_timer = 6.0
 number_of_projectiles_in_explosion = 16
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_w1gkd"]
+[sub_resource type="Resource" id="Resource_v801x"]
 resource_local_to_scene = true
 script = ExtResource("7_i6vjd")
 initial_speed = 600
@@ -208,9 +209,9 @@ speed = 600
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
 gravity = 5.0
-affected_by_gravity = true
+affected_by_gravity = false
 bounces_off_floor = false
-affected_by_hard_floor = true
+affected_by_hard_floor = false
 affected_by_soft_floor = false
 explodes_on_floor = false
 explode_from_timer = false
@@ -218,7 +219,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 18
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_qs34a"]
+[sub_resource type="Resource" id="Resource_nrqh5"]
 resource_local_to_scene = true
 script = ExtResource("7_i6vjd")
 initial_speed = 600
@@ -236,7 +237,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_31cnh"]
+[sub_resource type="Resource" id="Resource_t0lhx"]
 resource_local_to_scene = true
 script = ExtResource("7_i6vjd")
 initial_speed = 600
@@ -279,7 +280,7 @@ size = Vector2(164, 855)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpbd3"]
 size = Vector2(231, 798.5)
 
-[node name="SantaLevel" type="Node2D" node_paths=PackedStringArray("player", "enemy", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area", "pause_menu")]
+[node name="SantaLevel" type="Node2D" node_paths=PackedStringArray("player", "enemy", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area", "pause_menu", "black_transition")]
 script = ExtResource("1_amc2g")
 player = NodePath("Player")
 enemy = NodePath("EnemySanta")
@@ -290,6 +291,7 @@ exit_area = NodePath("ExitArea")
 clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
 clock_scene = ExtResource("2_uthra")
 pause_menu = NodePath("UI/PauseMenu")
+black_transition = NodePath("BlackTransition")
 
 [node name="Background3" type="Sprite2D" parent="."]
 position = Vector2(708, 68)
@@ -419,10 +421,10 @@ throw_scene = ExtResource("7_k17cj")
 burst_scene = ExtResource("7_k17cj")
 spiral_scene = ExtResource("7_k17cj")
 consecutive_scene = ExtResource("7_k17cj")
-burst_projectile_resource = SubResource("Resource_la0a7")
-throw_projectile_resource = SubResource("Resource_w1gkd")
-spiral_projectile_resource = SubResource("Resource_qs34a")
-consecutive_projectile_resource = SubResource("Resource_31cnh")
+burst_projectile_resource = SubResource("Resource_wda0i")
+throw_projectile_resource = SubResource("Resource_v801x")
+spiral_projectile_resource = SubResource("Resource_nrqh5")
+consecutive_projectile_resource = SubResource("Resource_t0lhx")
 projectile_nodes_holder = NodePath("../Projectiles")
 
 [node name="PCamTarget" type="Node2D" parent="EnemySanta"]
@@ -482,17 +484,20 @@ shape = SubResource("RectangleShape2D_dtm8v")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("14_sj873")]
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("black_transition") instance=ExtResource("14_sj873")]
 visible = false
+black_transition = NodePath("../../BlackTransition")
 
 [node name="Level_UI" parent="UI" instance=ExtResource("13_vyfeo")]
 metadata/_edit_use_anchors_ = true
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource("16_pjhxg")]
+[node name="GameOverScreen" parent="UI" node_paths=PackedStringArray("black_transition") instance=ExtResource("16_pjhxg")]
 visible = false
+black_transition = NodePath("../../BlackTransition")
 
-[node name="VictoryScreen" parent="UI" instance=ExtResource("17_panfn")]
+[node name="VictoryScreen" parent="UI" node_paths=PackedStringArray("black_transition") instance=ExtResource("17_panfn")]
 visible = false
+black_transition = NodePath("../../BlackTransition")
 
 [node name="ClockSpawner" type="Area2D" parent="."]
 position = Vector2(-246, -120)
@@ -522,6 +527,12 @@ room_size = Vector2(1800, 1200)
 zoom = 1.0
 open_sides = 0
 priority = 1
+
+[node name="BlackTransition" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(571, 294)
+scale = Vector2(40, 40)
+texture = ExtResource("19_xqswb")
 
 [connection signal="update_hp_bar" from="EnemySanta" to="UI/Level_UI" method="_on_enemy_update_hp_bar"]
 [connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]

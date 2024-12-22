@@ -14,6 +14,8 @@ class_name Level extends Node2D
 
 @export var pause_menu: CenterContainer
 
+@export var black_transition: Sprite2D
+
 @onready var spawn_area = clock_spawn_area.shape.extents
 @onready var origin = clock_spawn_area.global_position - spawn_area
 
@@ -28,6 +30,10 @@ func _ready() -> void:
 	player.special.connect(_on_player_special)
 	player.game_over.connect(_on_game_over)
 	enemy.victory.connect(_on_victory)
+	MusicManager.play_music("res://Assets/Music/Wild Game Jam In Game 2.wav")
+	get_tree().create_tween().tween_property(black_transition,"modulate:a",0,4.0)
+	MusicManager.fade_in_track(4.0)
+	
 	#test_shake = $ProCam2D.get_addons()[0]
 	#test_shake.shake()
 

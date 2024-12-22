@@ -26,6 +26,10 @@ var is_crouching = false
 var freeze_counter = 4
 var freeze_counter_filled = 4
 
+var invincibility_timer_initial = 2.0
+var invincibility_timer = invincibility_timer_initial
+var invincible = false
+
 var hearts = 10
 signal ui_heart_damage()
 signal update_clock_ui(value)
@@ -51,6 +55,13 @@ func _process(delta: float) -> void:
 			can_attack = true
 			strike_hitbox.monitoring = false
 			attack_timer = attack_duration
+	#invincibility
+	if invincible:
+		if invincibility_timer > 0:
+			invincibility_timer -= delta
+		else:
+			invincible = false
+			invincibility_timer = invincibility_timer_initial
 
 func _physics_process(delta: float) -> void:
 	#Gravity effect
@@ -143,11 +154,14 @@ func flip_player(face_right):
 
 func damage():
 	#print("damaging")
+	if invincible:
+		return
 	hearts -= 1
 	ui_heart_damage.emit()
 	if hearts <= 0:
 		#print("game over")
 		game_over.emit()
+	invincible = true
 	player_sprite.material.set_shader_parameter("progress",1)
 	await get_tree().create_timer(.2).timeout
 	player_sprite.material.set_shader_parameter("progress",0)

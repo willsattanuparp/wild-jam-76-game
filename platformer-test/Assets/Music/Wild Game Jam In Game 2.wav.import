@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://baw8ctofd8e8r"
+path="res://.godot/imported/Wild Game Jam In Game 2.wav-ebec8e4869ce75d16f88dcf9e80890bb.sample"
+
+[deps]
+
+source_file="res://Assets/Music/Wild Game Jam In Game 2.wav"
+dest_files=["res://.godot/imported/Wild Game Jam In Game 2.wav-ebec8e4869ce75d16f88dcf9e80890bb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
