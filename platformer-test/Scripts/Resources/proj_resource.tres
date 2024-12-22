@@ -5,14 +5,17 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_bs1cj")
-initial_speed = 600
+initial_speed = 300
+speed = 600
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
-affected_by_gravity = false
-bounces_off_floor = false
-affected_by_hard_floor = false
+gravity = 5.0
+affected_by_gravity = true
+bounces_off_floor = true
+affected_by_hard_floor = true
 affected_by_soft_floor = false
 explodes_on_floor = false
 explode_from_timer = false
-explosion_timer = 4.0
-number_of_projectiles_in_explosion = 6
+explosion_timer = 2.0
+number_of_projectiles_in_explosion = 8
+rotation_rate = 100

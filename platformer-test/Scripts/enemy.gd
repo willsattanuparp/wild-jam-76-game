@@ -133,16 +133,17 @@ func attack_state_phase_one(delta):
 		attack_timer = initial_attack_timer
 		var rand = randf()
 		if rand < 0.2:
-			print("throw")
+			#print("throw")
 			attack_consecutive(0,0,Vector2.ZERO,1.2,true,.8,3) 
 		elif rand < 0.6:
-			print("spiral")
+			#print("spiral")
 			attack_spiral(8,.3)
 		elif rand < 0.9:
-			print("burst")
+			#print("burst")
 			attack_burst(10)
 		else:
-			print("idle")
+			pass
+			#print("idle")
 		
 	if health < 70:
 		initial_attack_timer = 5.0
@@ -244,7 +245,7 @@ func movement_state_change_position(_delta):
 			else:
 				marker = next_marker
 			#marker = jump_locations[randi() % jump_locations.size()]
-		print(marker.id)
+		#print(marker.id)
 		var pos_change_leap_time = current_landing.get_time_to_location(marker.id)
 		target_pos = marker.global_position
 		pacing_boundry = marker.get_boundries()
@@ -276,7 +277,8 @@ func instantiate_projectile_scene(projectile_scene: PackedScene, res: Resource, 
 	if res == null:
 		return
 	var projectile = projectile_scene.instantiate() as Projectile
-	initialize_spawning_projectile_from_resource(projectile,throw_projectile_resource)
+	initialize_spawning_projectile_from_resource(projectile,res)
+	#print("test" + str(projectile.explode_from_timer))
 	return projectile
 
 func attack_throw(direction: Vector2,direct_at_player: bool, point: Vector2 = Vector2.ZERO):
@@ -358,7 +360,7 @@ func flip_player(face_right):
 
 func _on_change_position_timer_timeout() -> void:
 	if randf() < .5:
-		print("changing")
+		#print("changing")
 		changed_position = false
 		change_movement_state(MOVEMENT_STATE.CHANGE_POSITION)
 
@@ -366,6 +368,8 @@ func initialize_spawning_projectile_from_resource(proj: Projectile, projectile_s
 	proj.initial_speed = projectile_stats.initial_speed
 	proj.velocity = projectile_stats.velocity
 	proj.gravity_effect = projectile_stats.gravity_effect
+	#print("test2" + str(proj.explode_from_timer))
+	#print("test3" + str(projectile_stats.explode_from_timer))
 	proj.affected_by_gravity = projectile_stats.affected_by_gravity
 	proj.bounces_off_floor = projectile_stats.bounces_off_floor
 	proj.affected_by_hard_floor = projectile_stats.affected_by_hard_floor

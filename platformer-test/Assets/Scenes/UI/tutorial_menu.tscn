@@ -1,4 +1,13 @@
-[gd_scene format=3 uid="uid://bqfp1dd368yvq"]
+[gd_scene load_steps=9 format=3 uid="uid://bqfp1dd368yvq"]
+
+[ext_resource type="Script" path="res://Scripts/tutorial_menu.gd" id="1_gm081"]
+[ext_resource type="Texture2D" uid="uid://611wdr5ew2ow" path="res://Assets/Sprites/Projectiles/Clock.png" id="1_jqnw3"]
+[ext_resource type="Texture2D" uid="uid://c18r0yrtkhgyn" path="res://Assets/Sprites/Projectiles/Antler.png" id="2_frdlu"]
+[ext_resource type="Texture2D" uid="uid://ba2pvlbaf3muw" path="res://Assets/Sprites/Backgrounds/Parallax_Trees.png" id="2_v78w3"]
+[ext_resource type="FontFile" uid="uid://cx0trl8kduilf" path="res://Assets/Fonts/DePixelKlein.ttf" id="3_8pdrd"]
+[ext_resource type="Texture2D" uid="uid://4q3o52qummxn" path="res://Assets/Sprites/Projectiles/Coal.png" id="3_t3v3c"]
+[ext_resource type="Texture2D" uid="uid://ckjriu5cpmcq1" path="res://Assets/Sprites/Projectiles/Ornament.png" id="4_i7ryv"]
+[ext_resource type="Texture2D" uid="uid://rrqxi2oywm63" path="res://Assets/Sprites/Projectiles/Present.png" id="5_dlvo8"]
 
 [node name="TutorialMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +16,93 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gm081")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(647.5, 305)
+scale = Vector2(4, 4)
+texture = ExtResource("2_v78w3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="SettingsGridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+columns = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+
+[node name="Clock" type="Sprite2D" parent="MarginContainer/VBoxContainer/SettingsGridContainer/Control"]
+position = Vector2(77.5, 55)
+scale = Vector2(3, 3)
+texture = ExtResource("1_jqnw3")
+
+[node name="ClockLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8pdrd")
+theme_override_font_sizes/font_size = 18
+text = "
+
+
+                              Collect the clocks to power up your freeze ability!
+
+
+
+
+"
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/SettingsGridContainer/Control2"]
+position = Vector2(28.5, 8)
+scale = Vector2(3, 3)
+texture = ExtResource("2_frdlu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MarginContainer/VBoxContainer/SettingsGridContainer/Control2"]
+position = Vector2(106.5, 5)
+scale = Vector2(3, 3)
+texture = ExtResource("3_t3v3c")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MarginContainer/VBoxContainer/SettingsGridContainer/Control2"]
+position = Vector2(16.5, 85)
+scale = Vector2(3, 3)
+texture = ExtResource("4_i7ryv")
+
+[node name="Sprite2D4" type="Sprite2D" parent="MarginContainer/VBoxContainer/SettingsGridContainer/Control2"]
+position = Vector2(101.5, 84)
+scale = Vector2(3, 3)
+texture = ExtResource("5_dlvo8")
+
+[node name="ProjLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8pdrd")
+theme_override_font_sizes/font_size = 18
+text = "
+
+                              Use your freeze ability to freeze these projectiles and hit them back at the enemy!
+
+
+
+
+"
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back to Main"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

@@ -14,7 +14,7 @@ func freeze_ripple(time):
 	freeze_hitbox.queue_free()
 	if tween_texture.is_running():
 		await tween_texture.finished
-	print("done")
+	#print("done")
 	queue_free()
 
 

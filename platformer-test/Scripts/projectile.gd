@@ -81,7 +81,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.damage()
 		projectile_explode()
 	if body.is_in_group("Enemy"):
-		print("testdamage")
+		#print("testdamage")
 		body.damage(5)
 
 func _process(delta: float) -> void:
@@ -118,7 +118,7 @@ func _process(delta: float) -> void:
 			unfreezing = false
 	#explosion based on timer
 	if explode_from_timer:
-		if explosion_timer > 0:
+		if explosion_timer > 0 and !frozen:
 			explosion_timer -= delta
 		elif explosion_timer <= 0:
 			if projectile_scene != null:
@@ -136,7 +136,7 @@ func _process(delta: float) -> void:
 		#elif able_to_explode_timer <= 0:
 			#can_star_explode = true
 	if rotation_rate != 0:
-		rotation_degrees += rotation_rate * delta
+		proj_sprite.rotation_degrees += rotation_rate * delta
 
 func _physics_process(delta: float) -> void:
 	if is_moving:
@@ -153,7 +153,8 @@ func projectile_move(delta: float):
 	recalculate_ray_counter += 1
 
 func projectile_explode():
-	print("explode projectile then queue free")
+	pass
+	#print("explode projectile then queue free")
 
 func projectile_body_entered(body: Node2D):
 	#explodes on the floor
@@ -169,9 +170,10 @@ func projectile_body_entered(body: Node2D):
 		elif ignore_first_bounce_collision:
 			ignore_first_bounce_collision = false
 		#bounces off floor
+		#print(bounces_off_floor)
 		#print(collision_ray.is_colliding())
 		if bounces_off_floor and collision_ray.is_colliding() and collision_ray.get_collider().is_in_group("Floor"):
-			#print("collide")
+			print("collide")
 			var collision_normal = collision_ray.get_collision_normal()
 			velocity = velocity.bounce(collision_normal)
 			#TODO: note that off freeze it goes back to normal velocity
@@ -184,6 +186,12 @@ func star_explosion(number_of_projectiles: int,collide_on_floor: bool):
 		var angle = angle_inc * i
 		var projectile = projectile_scene.instantiate() as Projectile
 		initialize_spawning_projectile_from_resource(projectile)
+		
+	#todo - these become null because onready - this runs into a nullpointer on star-explosion
+		if projectile.speed == null:
+			projectile.speed = speed
+		if projectile.gravity == null:
+			projectile.gravity = gravity
 		projectile.velocity = Vector2(cos(angle),sin(angle))
 		projectile.position = position
 		#offset spawn-in so the collisions work
@@ -231,6 +239,9 @@ func initialize_spawning_projectile_from_resource(proj: Projectile):
 	proj.projectile_scene = projectile_stats.projectile_scene
 	proj.projectile_stats = projectile_stats.projectile_stats
 	proj.rotation_rate = projectile_stats.rotation_rate
+	#todo - these become null because onready - this runs into a nullpointer on star-explosion
+	proj.speed = projectile_stats.speed
+	proj.gravity = projectile_stats.gravity
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

@@ -142,11 +142,11 @@ func flip_player(face_right):
 	player_sprite.scale.x *= -1
 
 func damage():
-	print("damaging")
+	#print("damaging")
 	hearts -= 1
 	ui_heart_damage.emit()
 	if hearts <= 0:
-		print("game over")
+		#print("game over")
 		game_over.emit()
 	player_sprite.material.set_shader_parameter("progress",1)
 	await get_tree().create_timer(.2).timeout

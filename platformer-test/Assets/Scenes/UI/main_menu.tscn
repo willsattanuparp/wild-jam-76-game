@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2vpajvqwl6wy"]
+[gd_scene load_steps=8 format=3 uid="uid://b2vpajvqwl6wy"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_cgusu"]
 [ext_resource type="Texture2D" uid="uid://wlvm2g7xhapr" path="res://Assets/Sprites/UI/PlayButton.png" id="2_8ek8d"]
-[ext_resource type="PackedScene" uid="uid://dmtuunmju0alm" path="res://Assets/Scenes/UI/option_menu.tscn" id="2_fwqwr"]
 [ext_resource type="Texture2D" uid="uid://bh3lkavyyj4d4" path="res://Assets/Sprites/UI/OptionsButton.png" id="3_ev3rq"]
 [ext_resource type="Texture2D" uid="uid://ynu50tn8xhbg" path="res://Assets/Sprites/UI/TutorialButton.png" id="4_ap7rd"]
 [ext_resource type="Texture2D" uid="uid://bmb4qekwxtfj6" path="res://Assets/Sprites/UI/QuitButton.png" id="5_rk2s8"]
+[ext_resource type="Texture2D" uid="uid://dvl4m6tmn5nq4" path="res://Assets/Sprites/UI/ArrowLeft.png" id="6_bj5ks"]
+[ext_resource type="Texture2D" uid="uid://dgowjogogmv0j" path="res://Assets/Sprites/UI/ArrowRight.png" id="7_8qv8o"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -17,7 +18,6 @@ offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cgusu")
-options_scene = ExtResource("2_fwqwr")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -50,7 +50,52 @@ layout_mode = 2
 icon = ExtResource("5_rk2s8")
 flat = true
 
+[node name="LevelSelect" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="Button" parent="LevelSelect"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 376.0
+offset_right = 601.0
+offset_bottom = 784.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("6_bj5ks")
+
+[node name="Right" type="Button" parent="LevelSelect"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 376.0
+offset_right = 698.0
+offset_bottom = 784.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_8qv8o")
+
+[node name="Start" type="Button" parent="LevelSelect"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 543.0
+offset_right = 456.0
+offset_bottom = 583.0
+scale = Vector2(2, 2)
+icon = ExtResource("2_8ek8d")
+flat = true
+
+[node name="Back" type="Button" parent="LevelSelect"]
+layout_mode = 0
+offset_left = 677.0
+offset_top = 567.0
+offset_right = 722.0
+offset_bottom = 598.0
+text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="LevelSelect/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="LevelSelect/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="LevelSelect/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="LevelSelect/Back" to="." method="_on_back_pressed"]

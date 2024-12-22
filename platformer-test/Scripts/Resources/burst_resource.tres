@@ -1,19 +1,25 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://4hjkmi0ew01"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://4hjkmi0ew01"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="1_hmsvi"]
+[ext_resource type="PackedScene" uid="uid://bpp8qkbuqwcth" path="res://Assets/Scenes/Projectiles/projectile_ornament.tscn" id="1_qs7ic"]
+[ext_resource type="Resource" uid="uid://byttuvxqxypjb" path="res://Scripts/Resources/spiral_resource.tres" id="2_xsrkx"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_hmsvi")
-initial_speed = 600
+initial_speed = 300
+speed = 600
 velocity = Vector2(1, 0)
-gravity_effect = 5.0
-affected_by_gravity = false
+gravity_effect = 3.0
+gravity = 5.0
+affected_by_gravity = true
 bounces_off_floor = false
 affected_by_hard_floor = false
 affected_by_soft_floor = false
 explodes_on_floor = false
-explode_from_timer = false
-explosion_timer = 4.0
-number_of_projectiles_in_explosion = 6
+explode_from_timer = true
+explosion_timer = 2.0
+number_of_projectiles_in_explosion = 16
+projectile_scene = ExtResource("1_qs7ic")
+projectile_stats = ExtResource("2_xsrkx")
 rotation_rate = 100

@@ -1,8 +1,10 @@
 extends Resource
 
 @export var initial_speed: int = 600
+@export var speed: int = 600
 @export var velocity: Vector2 = Vector2.RIGHT
 @export var gravity_effect: float = 5.0
+@export var gravity: float = 5.0
 @export var affected_by_gravity: bool = false
 @export var bounces_off_floor: bool = false
 @export var affected_by_hard_floor: bool = false
