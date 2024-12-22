@@ -44,7 +44,7 @@ func _on_player_special() -> void:
 	special.freeze_ripple(1)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Escape"):
+	if Input.is_action_just_pressed("Pause"):
 		pause_menu.toggle_pause()
 	if clock_spawn_timer > 0:
 		clock_spawn_timer -= delta

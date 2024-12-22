@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2vpajvqwl6wy"]
+[gd_scene load_steps=7 format=3 uid="uid://b2vpajvqwl6wy"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_cgusu"]
 [ext_resource type="Texture2D" uid="uid://wlvm2g7xhapr" path="res://Assets/Sprites/UI/PlayButton.png" id="2_8ek8d"]
+[ext_resource type="PackedScene" uid="uid://dmtuunmju0alm" path="res://Assets/Scenes/UI/option_menu.tscn" id="2_fwqwr"]
 [ext_resource type="Texture2D" uid="uid://bh3lkavyyj4d4" path="res://Assets/Sprites/UI/OptionsButton.png" id="3_ev3rq"]
 [ext_resource type="Texture2D" uid="uid://ynu50tn8xhbg" path="res://Assets/Sprites/UI/TutorialButton.png" id="4_ap7rd"]
 [ext_resource type="Texture2D" uid="uid://bmb4qekwxtfj6" path="res://Assets/Sprites/UI/QuitButton.png" id="5_rk2s8"]
@@ -16,6 +17,7 @@ offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cgusu")
+options_scene = ExtResource("2_fwqwr")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

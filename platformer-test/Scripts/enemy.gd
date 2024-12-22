@@ -48,7 +48,7 @@ var MAX_SPEED = 200
 
 var health = 100
 
-var initial_attack_timer: float = 10.0
+var initial_attack_timer: float = 6.0
 var attack_timer = initial_attack_timer
 
 signal victory()
@@ -348,6 +348,9 @@ func damage(value):
 	update_hp_bar.emit(health)
 	if health <= 0:
 		victory.emit()
+	$Sprite2D.material.set_shader_parameter("progress",1)
+	await get_tree().create_timer(.2).timeout
+	$Sprite2D.material.set_shader_parameter("progress",0)
 
 func flip_player(face_right):
 	facing_right = face_right

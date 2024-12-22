@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		can_attack = false
 		strike_hitbox.monitoring = true
 	#special - freeze
-	if Input.is_action_just_pressed("Special") and freeze_counter >= 4:
+	if Input.is_action_just_pressed("Freeze") and freeze_counter >= 4:
 		freeze_counter = 0
 		update_clock_ui.emit(freeze_counter)
 		special.emit()
@@ -114,13 +114,14 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 	elif anim_player.is_playing() and anim_player.current_animation == "player_walk":
 		#print("test")
+		player_sprite.frame = 0
 		anim_player.stop()
 	move_and_slide()
 
 func crouch():
 	is_crouching = true
 	velocity.x = 0
-	$PlayerSprite.frame = 22
+	player_sprite.frame = 22
 	$StandingCollision.disabled = true
 	$CrouchingCollision.disabled = false
 
@@ -147,6 +148,9 @@ func damage():
 	if hearts <= 0:
 		print("game over")
 		game_over.emit()
+	player_sprite.material.set_shader_parameter("progress",1)
+	await get_tree().create_timer(.2).timeout
+	player_sprite.material.set_shader_parameter("progress",0)
 
 
 func _on_strike_hitbox_area_entered(area: Area2D) -> void:

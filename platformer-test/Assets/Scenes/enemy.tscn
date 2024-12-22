@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvqx0ai7kl6y5"]
+[gd_scene load_steps=4 format=3 uid="uid://bvqx0ai7kl6y5"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_y31qk"]
+[ext_resource type="Shader" path="res://Assets/Shader/damage_shader.gdshader" id="2_b86d7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20d53"]
+shader = ExtResource("2_b86d7")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "vision_ray", "enemy_sprite") groups=["Enemy"]]
 collision_layer = 16
@@ -11,6 +17,8 @@ vision_ray = NodePath("VisionRay")
 enemy_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_20d53")
+position = Vector2(3, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

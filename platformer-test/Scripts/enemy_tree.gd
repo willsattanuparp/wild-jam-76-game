@@ -41,7 +41,7 @@ func attack_state_phase_one(delta):
 		else:
 			animation_player.play("tree_yell")
 	if health < 70:
-		initial_attack_timer = 7.0
+		initial_attack_timer = 5.0
 		attack_timer = initial_attack_timer
 		change_attack_state(ATTACK_STATE.PHASE_TWO)
 
@@ -63,7 +63,7 @@ func attack_state_phase_two(delta):
 		else:
 			animation_player.play("tree_yell")
 	if health < 40:
-		initial_attack_timer = 7.0
+		initial_attack_timer = 4.0
 		attack_timer = initial_attack_timer
 		change_attack_state(ATTACK_STATE.PHASE_THREE)
 
@@ -84,7 +84,7 @@ func attack_state_phase_three(delta):
 		else:
 			animation_player.play("tree_yell")
 	if health < 15:
-		initial_attack_timer = 5.0
+		initial_attack_timer = 3.0
 		attack_timer = initial_attack_timer
 		change_attack_state(ATTACK_STATE.PHASE_FINAL)
 

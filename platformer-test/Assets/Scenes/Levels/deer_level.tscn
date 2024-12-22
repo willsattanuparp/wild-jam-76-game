@@ -182,7 +182,7 @@ physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_dp7y7")
 
-[sub_resource type="Resource" id="Resource_qqks6"]
+[sub_resource type="Resource" id="Resource_uirpl"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -198,7 +198,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_hs3fb"]
+[sub_resource type="Resource" id="Resource_uemc8"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -214,7 +214,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_v40i2"]
+[sub_resource type="Resource" id="Resource_r6t2k"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -230,7 +230,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_uatkl"]
+[sub_resource type="Resource" id="Resource_mqudm"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -405,10 +405,10 @@ throw_scene = ExtResource("7_jdlir")
 burst_scene = ExtResource("7_jdlir")
 spiral_scene = ExtResource("7_jdlir")
 consecutive_scene = ExtResource("7_jdlir")
-burst_projectile_resource = SubResource("Resource_qqks6")
-throw_projectile_resource = SubResource("Resource_hs3fb")
-spiral_projectile_resource = SubResource("Resource_v40i2")
-consecutive_projectile_resource = SubResource("Resource_uatkl")
+burst_projectile_resource = SubResource("Resource_uirpl")
+throw_projectile_resource = SubResource("Resource_uemc8")
+spiral_projectile_resource = SubResource("Resource_r6t2k")
+consecutive_projectile_resource = SubResource("Resource_mqudm")
 projectile_nodes_holder = NodePath("../Projectiles")
 
 [node name="PCamTarget" type="Node2D" parent="EnemyDeer"]
