@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://yfg21s85jc1c"]
+[gd_scene load_steps=27 format=4 uid="uid://yfg21s85jc1c"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_sm3ev"]
 [ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_5ix74"]
@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="8_t0n4y"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_room.gd" id="14_ptiat"]
 [ext_resource type="Texture2D" uid="uid://ba2pvlbaf3muw" path="res://Assets/Sprites/Backgrounds/Parallax_Trees.png" id="15_qpd07"]
+[ext_resource type="PackedScene" uid="uid://dhcbuiq6v7s6t" path="res://Assets/Scenes/UI/pause_menu.tscn" id="16_hfhrq"]
+[ext_resource type="PackedScene" uid="uid://b1jl4bi5f16yr" path="res://Assets/Scenes/UI/game_over_screen.tscn" id="17_h7vef"]
+[ext_resource type="PackedScene" uid="uid://cvackp5pqvutj" path="res://Assets/Scenes/UI/victory_screen.tscn" id="18_abpct"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8ugeb"]
 texture = ExtResource("8_t0n4y")
@@ -220,15 +223,17 @@ size = Vector2(164, 855)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d12g1"]
 size = Vector2(231, 798.5)
 
-[node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area")]
+[node name="TreeLevel" type="Node2D" node_paths=PackedStringArray("player", "enemy", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area", "pause_menu")]
 script = ExtResource("1_sm3ev")
 player = NodePath("Player")
+enemy = NodePath("EnemyTree")
 special_holder_node = NodePath("SpecialHolder")
 projectile_holder_node = NodePath("Projectiles")
 clock_holder_node = NodePath("ClockHolder")
 exit_area = NodePath("ExitArea")
 clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
 clock_scene = ExtResource("2_5ix74")
+pause_menu = NodePath("UI/PauseMenu")
 
 [node name="Background3" type="Sprite2D" parent="."]
 position = Vector2(708, 68)
@@ -385,6 +390,15 @@ shape = SubResource("RectangleShape2D_5vbda")
 
 [node name="Level_UI" parent="UI" instance=ExtResource("7_yh47m")]
 metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("16_hfhrq")]
+visible = false
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("17_h7vef")]
+visible = false
+
+[node name="VictoryScreen" parent="UI" instance=ExtResource("18_abpct")]
+visible = false
 
 [node name="ClockSpawner" type="Area2D" parent="."]
 

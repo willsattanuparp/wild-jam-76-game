@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1jl4bi5f16yr"]
+
+[ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_ub1ex"]
+[ext_resource type="Theme" uid="uid://er7mjh37fjc7" path="res://Assets/Theme/custom_theme.tres" id="2_8okbk"]
+[ext_resource type="PackedScene" uid="uid://b2vpajvqwl6wy" path="res://Assets/Scenes/UI/main_menu.tscn" id="2_8vyxs"]
+
+[node name="GameOverScreen" type="CenterContainer"]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -87.5
+offset_right = 95.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_ub1ex")
+title_scene = ExtResource("2_8vyxs")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_8okbk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Over"
+
+[node name="To Title" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "To Title
+"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/To Title" to="." method="_on_to_title_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

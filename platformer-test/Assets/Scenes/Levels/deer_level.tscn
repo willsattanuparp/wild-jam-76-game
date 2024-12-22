@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cmcckmoeuwi7j"]
+[gd_scene load_steps=30 format=4 uid="uid://cmcckmoeuwi7j"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_ym3bj"]
 [ext_resource type="Texture2D" uid="uid://ba2pvlbaf3muw" path="res://Assets/Sprites/Backgrounds/Parallax_Trees.png" id="2_1i607"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/nds/a.gd" id="11_qbglm"]
 [ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="12_2dlbq"]
 [ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="13_sw46b"]
+[ext_resource type="PackedScene" uid="uid://dhcbuiq6v7s6t" path="res://Assets/Scenes/UI/pause_menu.tscn" id="15_33rho"]
+[ext_resource type="PackedScene" uid="uid://b1jl4bi5f16yr" path="res://Assets/Scenes/UI/game_over_screen.tscn" id="16_c1w16"]
+[ext_resource type="PackedScene" uid="uid://cvackp5pqvutj" path="res://Assets/Scenes/UI/victory_screen.tscn" id="17_3mx3y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp7y7"]
 texture = ExtResource("2_s2ocf")
@@ -179,7 +182,7 @@ physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_dp7y7")
 
-[sub_resource type="Resource" id="Resource_8e3ox"]
+[sub_resource type="Resource" id="Resource_qqks6"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -195,7 +198,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_n6vt0"]
+[sub_resource type="Resource" id="Resource_hs3fb"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -211,7 +214,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_jlfk8"]
+[sub_resource type="Resource" id="Resource_v40i2"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -227,7 +230,7 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_in3vq"]
+[sub_resource type="Resource" id="Resource_uatkl"]
 resource_local_to_scene = true
 script = ExtResource("7_avmgd")
 initial_speed = 600
@@ -268,15 +271,17 @@ size = Vector2(164, 855)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07i1h"]
 size = Vector2(231, 798.5)
 
-[node name="DeerLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area")]
+[node name="DeerLevel" type="Node2D" node_paths=PackedStringArray("player", "enemy", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area", "pause_menu")]
 script = ExtResource("1_ym3bj")
 player = NodePath("Player")
+enemy = NodePath("EnemyDeer")
 special_holder_node = NodePath("SpecialHolder")
 projectile_holder_node = NodePath("Projectiles")
 clock_holder_node = NodePath("ClockHolder")
 exit_area = NodePath("ExitArea")
 clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
 clock_scene = ExtResource("2_hoi5o")
+pause_menu = NodePath("UI/PauseMenu")
 
 [node name="Background3" type="Sprite2D" parent="."]
 position = Vector2(708, 68)
@@ -400,10 +405,10 @@ throw_scene = ExtResource("7_jdlir")
 burst_scene = ExtResource("7_jdlir")
 spiral_scene = ExtResource("7_jdlir")
 consecutive_scene = ExtResource("7_jdlir")
-burst_projectile_resource = SubResource("Resource_8e3ox")
-throw_projectile_resource = SubResource("Resource_n6vt0")
-spiral_projectile_resource = SubResource("Resource_jlfk8")
-consecutive_projectile_resource = SubResource("Resource_in3vq")
+burst_projectile_resource = SubResource("Resource_qqks6")
+throw_projectile_resource = SubResource("Resource_hs3fb")
+spiral_projectile_resource = SubResource("Resource_v40i2")
+consecutive_projectile_resource = SubResource("Resource_uatkl")
 projectile_nodes_holder = NodePath("../Projectiles")
 
 [node name="PCamTarget" type="Node2D" parent="EnemyDeer"]
@@ -466,6 +471,15 @@ shape = SubResource("RectangleShape2D_xnlx3")
 
 [node name="Level_UI" parent="UI" instance=ExtResource("13_sw46b")]
 metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("15_33rho")]
+visible = false
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("16_c1w16")]
+visible = false
+
+[node name="VictoryScreen" parent="UI" instance=ExtResource("17_3mx3y")]
+visible = false
 
 [node name="ClockSpawner" type="Area2D" parent="."]
 position = Vector2(-246, -120)

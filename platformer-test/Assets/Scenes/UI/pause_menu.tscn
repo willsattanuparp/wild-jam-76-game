@@ -1,9 +1,46 @@
-[gd_scene format=3 uid="uid://dhcbuiq6v7s6t"]
+[gd_scene load_steps=4 format=3 uid="uid://dhcbuiq6v7s6t"]
 
-[node name="PauseMenu" type="Control"]
-layout_mode = 3
+[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_h26yd"]
+[ext_resource type="PackedScene" uid="uid://b2vpajvqwl6wy" path="res://Assets/Scenes/UI/main_menu.tscn" id="2_8cyhs"]
+[ext_resource type="Theme" uid="uid://er7mjh37fjc7" path="res://Assets/Theme/custom_theme.tres" id="3_i5ktu"]
+
+[node name="PauseMenu" type="CenterContainer"]
+process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_h26yd")
+title_scene = ExtResource("2_8cyhs")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("3_i5ktu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Paused"
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="To Title" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "To Title
+"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/To Title" to="." method="_on_to_title_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://dmtuunmju0alm"]
+[gd_scene load_steps=3 format=3 uid="uid://dmtuunmju0alm"]
+
+[ext_resource type="Script" path="res://Scripts/option_menu.gd" id="1_cu1i3"]
+[ext_resource type="PackedScene" uid="uid://b2vpajvqwl6wy" path="res://Assets/Scenes/UI/main_menu.tscn" id="2_b7oaa"]
 
 [node name="OptionMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +10,54 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_cu1i3")
+action_items = Array[String](["Left", "Right", "Down", "Special", "Jump", "Attack", "Crouch", "Escape"])
+menu_scene = ExtResource("2_b7oaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="SettingsGridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SettingsGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back to Main"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
