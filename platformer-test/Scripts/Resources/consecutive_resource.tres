@@ -16,3 +16,4 @@ explodes_on_floor = false
 explode_from_timer = false
 explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
+rotation_rate = 100

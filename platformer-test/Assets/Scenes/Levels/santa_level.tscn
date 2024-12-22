@@ -1,23 +1,22 @@
-[gd_scene load_steps=27 format=4 uid="uid://cmcckmoeuwi7j"]
+[gd_scene load_steps=26 format=4 uid="uid://ddicdvht4pvaw"]
 
-[ext_resource type="Script" path="res://Scripts/level.gd" id="1_ym3bj"]
-[ext_resource type="Texture2D" uid="uid://ba2pvlbaf3muw" path="res://Assets/Sprites/Backgrounds/Parallax_Trees.png" id="2_1i607"]
-[ext_resource type="PackedScene" uid="uid://b05q8a5jxd3yi" path="res://Assets/Scenes/clock.tscn" id="2_hoi5o"]
-[ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="2_s2ocf"]
-[ext_resource type="PackedScene" uid="uid://ekcws2r73mra" path="res://Assets/Scenes/Levels/LevelObjects/landing_point.tscn" id="3_heev7"]
-[ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_room.gd" id="4_nf3g2"]
-[ext_resource type="PackedScene" uid="uid://dpvleqmk3slf2" path="res://Assets/Scenes/Enemies/enemy_deer.tscn" id="6_eubv1"]
-[ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="7_avmgd"]
-[ext_resource type="PackedScene" uid="uid://dl8xoln33olqi" path="res://Assets/Scenes/Projectiles/projectile_antler.tscn" id="7_jdlir"]
-[ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_target.gd" id="8_qtl6u"]
-[ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="9_wvh0r"]
-[ext_resource type="Script" path="res://addons/ProCam2D/scripts/procam2d.gd" id="10_c0uos"]
-[ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/nds/a.gd" id="11_qbglm"]
-[ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="12_2dlbq"]
-[ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="13_sw46b"]
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_amc2g"]
+[ext_resource type="Texture2D" uid="uid://ba2pvlbaf3muw" path="res://Assets/Sprites/Backgrounds/Parallax_Trees.png" id="2_u0g4p"]
+[ext_resource type="Texture2D" uid="uid://dv5a47qm1121m" path="res://Assets/Sprites/Environment/Environment_Sprites_and_Tileset_Winter.png" id="3_27vw4"]
+[ext_resource type="PackedScene" uid="uid://ekcws2r73mra" path="res://Assets/Scenes/Levels/LevelObjects/landing_point.tscn" id="4_h3jrj"]
+[ext_resource type="PackedScene" uid="uid://dpvleqmk3slf2" path="res://Assets/Scenes/Enemies/enemy_deer.tscn" id="5_xdwui"]
+[ext_resource type="PackedScene" uid="uid://dl8xoln33olqi" path="res://Assets/Scenes/Projectiles/projectile_antler.tscn" id="6_fsmpa"]
+[ext_resource type="Script" path="res://Scripts/Resources/projectile_resource.gd" id="7_i6vjd"]
+[ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_target.gd" id="8_4tuh4"]
+[ext_resource type="PackedScene" uid="uid://dq5rw3tkjsfom" path="res://Assets/Scenes/player.tscn" id="9_3dvwx"]
+[ext_resource type="Script" path="res://addons/ProCam2D/scripts/procam2d.gd" id="10_4aw6x"]
+[ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/nds/a.gd" id="11_3614s"]
+[ext_resource type="Script" path="res://addons/ProCam2D/scripts/core/addns/pcam_shake.gd" id="12_sprlp"]
+[ext_resource type="PackedScene" uid="uid://b1byvhom0yvmm" path="res://Assets/Scenes/UI/level_ui.tscn" id="13_vyfeo"]
+[ext_resource type="Script" path="res://addons/ProCam2D/scripts/pcam_room.gd" id="14_h6ng5"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp7y7"]
-texture = ExtResource("2_s2ocf")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01idd"]
+texture = ExtResource("3_27vw4")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -171,17 +170,17 @@ texture_region_size = Vector2i(32, 32)
 6:10/0 = 0
 7:10/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_cs3en"]
+[sub_resource type="TileSet" id="TileSet_b5pa8"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 physics_layer_1/collision_layer = 4
 physics_layer_1/collision_mask = 0
-sources/2 = SubResource("TileSetAtlasSource_dp7y7")
+sources/2 = SubResource("TileSetAtlasSource_01idd")
 
-[sub_resource type="Resource" id="Resource_i0gl1"]
+[sub_resource type="Resource" id="Resource_r6ag6"]
 resource_local_to_scene = true
-script = ExtResource("7_avmgd")
+script = ExtResource("7_i6vjd")
 initial_speed = 600
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
@@ -195,9 +194,9 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_ekhu8"]
+[sub_resource type="Resource" id="Resource_5wxe0"]
 resource_local_to_scene = true
-script = ExtResource("7_avmgd")
+script = ExtResource("7_i6vjd")
 initial_speed = 600
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
@@ -211,9 +210,9 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_acxuv"]
+[sub_resource type="Resource" id="Resource_6qm6k"]
 resource_local_to_scene = true
-script = ExtResource("7_avmgd")
+script = ExtResource("7_i6vjd")
 initial_speed = 600
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
@@ -227,9 +226,9 @@ explosion_timer = 4.0
 number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
-[sub_resource type="Resource" id="Resource_5l27p"]
+[sub_resource type="Resource" id="Resource_fc0uf"]
 resource_local_to_scene = true
-script = ExtResource("7_avmgd")
+script = ExtResource("7_i6vjd")
 initial_speed = 600
 velocity = Vector2(1, 0)
 gravity_effect = 5.0
@@ -244,7 +243,7 @@ number_of_projectiles_in_explosion = 6
 rotation_rate = 100
 
 [sub_resource type="Resource" id="Resource_u3ojo"]
-script = ExtResource("12_2dlbq")
+script = ExtResource("12_sprlp")
 preset = 8
 speed = 5.0
 intensity = 5.0
@@ -256,46 +255,39 @@ endless = false
 enabled = true
 priority = 0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnlx3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtm8v"]
 size = Vector2(2000, 1200)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6ye"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynpnv"]
 size = Vector2(1799.75, 124)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8coq3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpgmf"]
 size = Vector2(164, 855)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_07i1h"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpbd3"]
 size = Vector2(231, 798.5)
 
-[node name="DeerLevel" type="Node2D" node_paths=PackedStringArray("player", "special_holder_node", "projectile_holder_node", "clock_holder_node", "exit_area", "clock_spawn_area")]
-script = ExtResource("1_ym3bj")
-player = NodePath("Player")
-special_holder_node = NodePath("SpecialHolder")
-projectile_holder_node = NodePath("Projectiles")
-clock_holder_node = NodePath("ClockHolder")
-exit_area = NodePath("ExitArea")
-clock_spawn_area = NodePath("ClockSpawner/CollisionShape2D")
-clock_scene = ExtResource("2_hoi5o")
+[node name="SantaLevel" type="Node2D"]
+script = ExtResource("1_amc2g")
 
 [node name="Background3" type="Sprite2D" parent="."]
 position = Vector2(708, 68)
 scale = Vector2(6, 6)
-texture = ExtResource("2_1i607")
+texture = ExtResource("2_u0g4p")
 
 [node name="Background" type="TileMapLayer" parent="." groups=["Floor"]]
-tile_set = SubResource("TileSet_cs3en")
+tile_set = SubResource("TileSet_b5pa8")
 
 [node name="Background2" type="TileMapLayer" parent="." groups=["Floor"]]
-tile_set = SubResource("TileSet_cs3en")
+tile_set = SubResource("TileSet_b5pa8")
 
 [node name="Environment" type="TileMapLayer" parent="." groups=["Floor"]]
 tile_map_data = PackedByteArray("AAD4/xAAAgAOAAUAAAD4/xEAAgAOAAYAAAD4/xIAAgAOAAcAAAD4/xMAAgAOAAgAAAD3/xAAAgAOAAUAAAD3/xEAAgAOAAYAAAD3/xIAAgAOAAcAAAD3/xMAAgAOAAgAAAD2/xAAAgAOAAUAAAD2/xEAAgAOAAYAAAD2/xIAAgAOAAcAAAD2/xMAAgAOAAgAAAD1/xAAAgAOAAUAAAD1/xEAAgAOAAYAAAD1/xIAAgAOAAcAAAD1/xMAAgAOAAgAAAD0/xAAAgAOAAUAAAD0/xEAAgAOAAYAAAD0/xIAAgAOAAcAAAD0/xMAAgAOAAgAAAAyABAAAgAOAAUAAAAyABEAAgAOAAYAAAAyABIAAgAOAAcAAAAyABMAAgAOAAgAAAAzABAAAgAOAAUAAAAzABEAAgAOAAYAAAAzABIAAgAOAAcAAAAzABMAAgAOAAgAAADz/xAAAgAOAAUAAADz/xEAAgAOAAYAAADz/xIAAgAOAAcAAADz/xMAAgAOAAgAAADy/xAAAgAOAAUAAADy/xEAAgAOAAYAAADy/xIAAgAOAAcAAADy/xMAAgAOAAgAAAA0ABAAAgAOAAUAAAA0ABEAAgAOAAYAAAA0ABIAAgAOAAcAAAA0ABMAAgAOAAgAAAA1ABAAAgAOAAUAAAA1ABEAAgAOAAYAAAA1ABIAAgAOAAcAAAA1ABMAAgAOAAgAAAA2ABAAAgAOAAUAAAA2ABEAAgAOAAYAAAA2ABIAAgAOAAcAAAA2ABMAAgAOAAgAAAA3ABAAAgAOAAUAAAA3ABEAAgAOAAYAAAA3ABIAAgAOAAcAAAA3ABMAAgAOAAgAAAA4ABAAAgAOAAUAAAA4ABEAAgAOAAYAAAA4ABIAAgAOAAcAAAA4ABMAAgAOAAgAAAA5ABAAAgAOAAUAAAA5ABEAAgAOAAYAAAA5ABIAAgAOAAcAAAA5ABMAAgAOAAgAAADx/xAAAgAOAAUAAADx/xEAAgAOAAYAAADx/xIAAgAOAAcAAADx/xMAAgAOAAgAAADw/xAAAgAOAAUAAADw/xEAAgAOAAYAAADw/xIAAgAOAAcAAADw/xMAAgAOAAgAAADv/xIAAgAOAAcAAADv/xMAAgAOAAgAAADv/xAAAgAPAAgAAADv/xEAAgAOAAYAAADv/w8AAgAPAAgAAADv/w4AAgAPAAYAAADv/w0AAgAPAAYAAADv/wwAAgAPAAYAAADv/wsAAgAPAAYAAADv/woAAgAPAAYAAADv/wkAAgAPAAYAAADv/wgAAgAPAAYAAADv/wcAAgAPAAYAAADv/wYAAgAPAAYAAADv/wUAAgAPAAYAAADv/wQAAgAPAAYAAADv/wMAAgAPAAYAAADv/wIAAgAPAAYAAADv/wEAAgAPAAYAAADv/wAAAgAPAAYAAADv////AgAPAAYAAADv//7/AgAPAAYAAADv//3/AgAPAAYAAADv//z/AgAPAAYAAADv//v/AgAPAAYAAADv//r/AgAPAAYAAADv//n/AgAPAAYAAADv//j/AgAPAAYAAADv//f/AgAPAAYAAADv//b/AgAPAAYAAADv//X/AgAPAAYAAADv//T/AgAQAAYAAAA6APT/AgAPAAYAAAA6APX/AgAPAAYAAAA6APb/AgAPAAYAAAA6APf/AgAPAAYAAAA6APj/AgAPAAYAAAA6APn/AgAPAAYAAAA6APr/AgAPAAYAAAA6APv/AgAPAAYAAAA6APz/AgAPAAYAAAA6AP3/AgAPAAYAAAA6AP7/AgAPAAYAAAA6AP//AgAPAAYAAAA6AAAAAgAPAAYAAAA6AAEAAgAPAAYAAAA6AAIAAgAPAAYAAAA6AAMAAgAPAAYAAAA6AAQAAgAPAAYAAAA6AAUAAgAPAAYAAAA6AAYAAgAPAAYAAAA6AAcAAgAPAAYAAAA6AAgAAgAPAAYAAAA6AAkAAgAPAAYAAAA6AAoAAgAPAAYAAAA6AAsAAgAPAAYAAAA6AAwAAgAPAAYAAAA6AA0AAgAPAAYAAAA6AA4AAgAPAAYAAAA6AA8AAgAPAAYAAAA6ABAAAgAPAAYAAAA6ABEAAgAPAAYAAAA6ABIAAgAPAAYAAAA6ABMAAgAPAAYAAAD5/xAAAgAOAAUAAAD5/xEAAgAOAAYAAAD5/xIAAgAOAAcAAAD5/xMAAgAOAAgAAAD6/xAAAgAOAAUAAAD6/xEAAgAOAAYAAAD6/xIAAgAOAAcAAAD6/xMAAgAOAAgAAAD7/xAAAgAOAAUAAAD7/xEAAgAOAAYAAAD7/xIAAgAOAAcAAAD7/xMAAgAOAAgAAAD8/xAAAgAOAAUAAAD8/xEAAgAOAAYAAAD8/xIAAgAOAAcAAAD8/xMAAgAOAAgAAAD9/xAAAgAOAAUAAAD9/xEAAgAOAAYAAAD9/xIAAgAOAAcAAAD9/xMAAgAOAAgAAAD+/xAAAgAOAAUAAAD+/xEAAgAOAAYAAAD+/xIAAgAOAAcAAAD+/xMAAgAOAAgAAAD//xAAAgAOAAUAAAD//xEAAgAOAAYAAAD//xIAAgAOAAcAAAD//xMAAgAOAAgAAAAAABAAAgAOAAUAAAAAABEAAgAOAAYAAAAAABIAAgAOAAcAAAAAABMAAgAOAAgAAAABABAAAgAOAAUAAAABABEAAgAOAAYAAAABABIAAgAOAAcAAAABABMAAgAOAAgAAAACABAAAgAOAAUAAAACABEAAgAOAAYAAAACABIAAgAOAAcAAAACABMAAgAOAAgAAAADABAAAgAOAAUAAAADABEAAgAOAAYAAAADABIAAgAOAAcAAAADABMAAgAOAAgAAAAEABAAAgAOAAUAAAAEABEAAgAOAAYAAAAEABIAAgAOAAcAAAAEABMAAgAOAAgAAAAFABAAAgAOAAUAAAAFABEAAgAOAAYAAAAFABIAAgAOAAcAAAAFABMAAgAOAAgAAAAGABAAAgAOAAUAAAAGABEAAgAOAAYAAAAGABIAAgAOAAcAAAAGABMAAgAOAAgAAAAHABAAAgAOAAUAAAAHABEAAgAOAAYAAAAHABIAAgAOAAcAAAAHABMAAgAOAAgAAAAIABAAAgAOAAUAAAAIABEAAgAOAAYAAAAIABIAAgAOAAcAAAAIABMAAgAOAAgAAAAJABAAAgAOAAUAAAAJABEAAgAOAAYAAAAJABIAAgAOAAcAAAAJABMAAgAOAAgAAAAKABAAAgAOAAUAAAAKABEAAgAOAAYAAAAKABIAAgAOAAcAAAAKABMAAgAOAAgAAAALABAAAgAOAAUAAAALABEAAgAOAAYAAAALABIAAgAOAAcAAAALABMAAgAOAAgAAAAMABAAAgAOAAUAAAAMABEAAgAOAAYAAAAMABIAAgAOAAcAAAAMABMAAgAOAAgAAAANABAAAgAOAAUAAAANABEAAgAOAAYAAAANABIAAgAOAAcAAAANABMAAgAOAAgAAAAOABAAAgAOAAUAAAAOABEAAgAOAAYAAAAOABIAAgAOAAcAAAAOABMAAgAOAAgAAAAPABAAAgAOAAUAAAAPABEAAgAOAAYAAAAPABIAAgAOAAcAAAAPABMAAgAOAAgAAAAQABAAAgAOAAUAAAAQABEAAgAOAAYAAAAQABIAAgAOAAcAAAAQABMAAgAOAAgAAAARABAAAgAOAAUAAAARABEAAgAOAAYAAAARABIAAgAOAAcAAAARABMAAgAOAAgAAAASABAAAgAOAAUAAAASABEAAgAOAAYAAAASABIAAgAOAAcAAAASABMAAgAOAAgAAAATABAAAgAOAAUAAAATABEAAgAOAAYAAAATABIAAgAOAAcAAAATABMAAgAOAAgAAAAUABAAAgAOAAUAAAAUABEAAgAOAAYAAAAUABIAAgAOAAcAAAAUABMAAgAOAAgAAAAVABAAAgAOAAUAAAAVABEAAgAOAAYAAAAVABIAAgAOAAcAAAAVABMAAgAOAAgAAAAWABAAAgAOAAUAAAAWABEAAgAOAAYAAAAWABIAAgAOAAcAAAAWABMAAgAOAAgAAAAXABAAAgAOAAUAAAAXABEAAgAOAAYAAAAXABIAAgAOAAcAAAAXABMAAgAOAAgAAAAYABAAAgAOAAUAAAAYABEAAgAOAAYAAAAYABIAAgAOAAcAAAAYABMAAgAOAAgAAAAZABAAAgAOAAUAAAAZABEAAgAOAAYAAAAZABIAAgAOAAcAAAAZABMAAgAOAAgAAAAaABAAAgAOAAUAAAAaABEAAgAOAAYAAAAaABIAAgAOAAcAAAAaABMAAgAOAAgAAAAbABAAAgAOAAUAAAAbABEAAgAOAAYAAAAbABIAAgAOAAcAAAAbABMAAgAOAAgAAAAcABAAAgAOAAUAAAAcABEAAgAOAAYAAAAcABIAAgAOAAcAAAAcABMAAgAOAAgAAAAdABAAAgAOAAUAAAAdABEAAgAOAAYAAAAdABIAAgAOAAcAAAAdABMAAgAOAAgAAAAeABAAAgAOAAUAAAAeABEAAgAOAAYAAAAeABIAAgAOAAcAAAAeABMAAgAOAAgAAAAfABAAAgAOAAUAAAAfABEAAgAOAAYAAAAfABIAAgAOAAcAAAAfABMAAgAOAAgAAAAgABAAAgAOAAUAAAAgABEAAgAOAAYAAAAgABIAAgAOAAcAAAAgABMAAgAOAAgAAAAhABAAAgAOAAUAAAAhABEAAgAOAAYAAAAhABIAAgAOAAcAAAAhABMAAgAOAAgAAAAiABAAAgAOAAUAAAAiABEAAgAOAAYAAAAiABIAAgAOAAcAAAAiABMAAgAOAAgAAAAjABAAAgAOAAUAAAAjABEAAgAOAAYAAAAjABIAAgAOAAcAAAAjABMAAgAOAAgAAAAkABAAAgAOAAUAAAAkABEAAgAOAAYAAAAkABIAAgAOAAcAAAAkABMAAgAOAAgAAAAlABAAAgAOAAUAAAAlABEAAgAOAAYAAAAlABIAAgAOAAcAAAAlABMAAgAOAAgAAAAmABAAAgAOAAUAAAAmABEAAgAOAAYAAAAmABIAAgAOAAcAAAAmABMAAgAOAAgAAAAnABAAAgAOAAUAAAAnABEAAgAOAAYAAAAnABIAAgAOAAcAAAAnABMAAgAOAAgAAAAoABAAAgAOAAUAAAAoABEAAgAOAAYAAAAoABIAAgAOAAcAAAAoABMAAgAOAAgAAAApABAAAgAOAAUAAAApABEAAgAOAAYAAAApABIAAgAOAAcAAAApABMAAgAOAAgAAAAqABAAAgAOAAUAAAAqABEAAgAOAAYAAAAqABIAAgAOAAcAAAAqABMAAgAOAAgAAAArABAAAgAOAAUAAAArABEAAgAOAAYAAAArABIAAgAOAAcAAAArABMAAgAOAAgAAAAsABAAAgAOAAUAAAAsABEAAgAOAAYAAAAsABIAAgAOAAcAAAAsABMAAgAOAAgAAAAtABAAAgAOAAUAAAAtABEAAgAOAAYAAAAtABIAAgAOAAcAAAAtABMAAgAOAAgAAAAuABAAAgAOAAUAAAAuABEAAgAOAAYAAAAuABIAAgAOAAcAAAAuABMAAgAOAAgAAAAvABAAAgAOAAUAAAAvABEAAgAOAAYAAAAvABIAAgAOAAcAAAAvABMAAgAOAAgAAAAwABAAAgAOAAUAAAAwABEAAgAOAAYAAAAwABIAAgAOAAcAAAAwABMAAgAOAAgAAAAxABAAAgAOAAUAAAAxABEAAgAOAAYAAAAxABIAAgAOAAcAAAAxABMAAgAOAAgAAAD8/wUAAgABAAIAAAD9/wUAAgABAAIAAAD+/wUAAgACAAIAAAD7/wUAAgABAAIAAAD6/wUAAgABAAIAAAD5/wUAAgABAAIAAAD4/wUAAgABAAIAAAD3/wUAAgABAAIAAAAVAP//AgABAAIAAAAPAP//AgAAAAIAAAAQAP//AgABAAIAAAARAP//AgABAAIAAAASAP//AgABAAIAAAATAP//AgABAAIAAAAUAP//AgABAAIAAAAEAAkAAgABAAIAAAAFAAkAAgABAAIAAAAGAAkAAgABAAIAAAAHAAkAAgABAAIAAAAIAAkAAgABAAIAAAADAAkAAgAAAAIAAAApAAUAAgAAAAIAAAAjAAkAAgABAAIAAAAiAAkAAgABAAIAAAAhAAkAAgABAAIAAAAgAAkAAgABAAIAAAAfAAkAAgABAAIAAAAeAAkAAgABAAIAAAAdAAkAAgABAAIAAAAkAAkAAgACAAIAAAAcAAkAAgAAAAIAAAAJAAkAAgABAAIAAAAKAAkAAgABAAIAAAALAAkAAgACAAIAAAAYAP//AgACAAIAAAAXAP//AgABAAIAAAAWAP//AgABAAIAAAAwAAUAAgABAAIAAAAvAAUAAgABAAIAAAAuAAUAAgABAAIAAAAtAAUAAgABAAIAAAAsAAUAAgABAAIAAAArAAUAAgABAAIAAAAqAAUAAgABAAIAAAAMAAkAAgARAAQAAAANAAkAAgARAAQAAAAOAAkAAgARAAQAAAAPAAkAAgARAAQAAAAQAAkAAgARAAQAAAARAAkAAgARAAQAAAASAAkAAgARAAQAAAATAAkAAgARAAQAAAAUAAkAAgARAAQAAAAVAAkAAgARAAQAAAAWAAkAAgARAAQAAAAXAAkAAgARAAQAAAAYAAkAAgARAAQAAAAZAAkAAgARAAQAAAAaAAkAAgARAAQAAAAbAAkAAgARAAQAAAASAA4AAgARAAUAAAATAA4AAgARAAUAAAAUAA4AAgARAAUAAAAVAA4AAgARAAUAAAAWAA4AAgASAAUAAAARAA4AAgAQAAUAAAAaAAwAAgASAAUAAAANAAwAAgARAAUAAAAOAAwAAgASAAUAAAAZAAwAAgAQAAUAAAAbAAwAAgARAAUAAAAcAAwAAgASAAUAAAAMAAwAAgARAAUAAAALAAwAAgAQAAUAAAABAAcAAgABAAEAAAACAAcAAgABAAEAAAADAAcAAgABAAEAAAAkAAcAAgABAAEAAAAlAAcAAgABAAEAAAAmAAcAAgABAAEAAAAnAAcAAgACAAEAAAAjAAcAAgAAAAEAAAAEAAcAAgACAAEAAAAAAAcAAgAAAAEAAAA6APP/AgAQAAYAAAA6APL/AgAQAAYAAAA6APH/AgAQAAYAAAA6APD/AgAQAAYAAAA6AO//AgAQAAYAAAA6AO7/AgAQAAYAAAA5AO7/AgAQAAYAAAA4AO7/AgAQAAYAAAA3AO7/AgAQAAYAAAA2AO7/AgAQAAYAAAA1AO7/AgAQAAYAAAA0AO7/AgAQAAYAAAAzAO7/AgAQAAYAAAAyAO7/AgAQAAYAAAAxAO7/AgAQAAYAAAAwAO7/AgAQAAYAAAAvAO7/AgAQAAYAAAAuAO7/AgAQAAYAAAAtAO7/AgAQAAYAAAAsAO7/AgAQAAYAAAArAO7/AgAQAAYAAAAqAO7/AgAQAAYAAAApAO7/AgAQAAYAAAAoAO7/AgAQAAYAAAAnAO7/AgAQAAYAAAAmAO7/AgAQAAYAAAAlAO7/AgAQAAYAAAAkAO7/AgAQAAYAAAAjAO7/AgAQAAYAAAAiAO7/AgAQAAYAAAAhAO7/AgAQAAYAAAAgAO7/AgAQAAYAAAAfAO7/AgAQAAYAAAAeAO7/AgAQAAYAAAAdAO7/AgAQAAYAAAAcAO7/AgAQAAYAAAAbAO7/AgAQAAYAAAAaAO7/AgAQAAYAAAAZAO7/AgAQAAYAAAAYAO7/AgAQAAYAAAAXAO7/AgAQAAYAAAAWAO7/AgAQAAYAAAAVAO7/AgAQAAYAAAAUAO7/AgAQAAYAAAATAO7/AgAQAAYAAAASAO7/AgAQAAYAAAARAO7/AgAQAAYAAAAQAO7/AgAQAAYAAAAPAO7/AgAQAAYAAAAOAO7/AgAQAAYAAAANAO7/AgAQAAYAAAAMAO7/AgAQAAYAAAALAO7/AgAQAAYAAAAKAO7/AgAQAAYAAAAJAO7/AgAQAAYAAAAIAO7/AgAQAAYAAAAHAO7/AgAQAAYAAAAGAO7/AgAQAAYAAAAFAO7/AgAQAAYAAAAEAO7/AgAQAAYAAAADAO7/AgAQAAYAAAACAO7/AgAQAAYAAAABAO7/AgAQAAYAAAAAAO7/AgAQAAYAAAD//+7/AgAQAAYAAAD+/+7/AgAQAAYAAAD9/+7/AgAQAAYAAAD8/+7/AgAQAAYAAAD7/+7/AgAQAAYAAAD6/+7/AgAQAAYAAAD5/+7/AgAQAAYAAAD4/+7/AgAQAAYAAAD3/+7/AgAQAAYAAAD2/+7/AgAQAAYAAAD1/+7/AgAQAAYAAAD0/+7/AgAQAAYAAADz/+7/AgAQAAYAAADy/+7/AgAQAAYAAADx/+7/AgAQAAYAAADw/+7/AgAQAAYAAADv/+7/AgAQAAYAAADv/+//AgAQAAYAAADv//D/AgAQAAYAAADv//H/AgAQAAYAAADv//L/AgAQAAYAAADv//P/AgAQAAYAAAA=")
-tile_set = SubResource("TileSet_cs3en")
+tile_set = SubResource("TileSet_b5pa8")
 
 [node name="JumpLocations" type="Node2D" parent="."]
 
-[node name="TopMiddle" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_heev7")]
+[node name="TopMiddle" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("4_h3jrj")]
 position = Vector2(642, -32)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
@@ -313,7 +305,7 @@ position = Vector2(-138, 0)
 [node name="RightBound" type="Marker2D" parent="JumpLocations/TopMiddle"]
 position = Vector2(128, 0)
 
-[node name="BotMiddleLeft" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_heev7")]
+[node name="BotMiddleLeft" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("4_h3jrj")]
 position = Vector2(246, 287)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
@@ -331,7 +323,7 @@ position = Vector2(-89, -1)
 [node name="RightBound" type="Marker2D" parent="JumpLocations/BotMiddleLeft"]
 position = Vector2(78, -1)
 
-[node name="BotMiddleRight" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_heev7")]
+[node name="BotMiddleRight" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("4_h3jrj")]
 position = Vector2(1037, 287)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
@@ -349,7 +341,7 @@ position = Vector2(-85, 1)
 [node name="RightBound" type="Marker2D" parent="JumpLocations/BotMiddleRight"]
 position = Vector2(97, 1)
 
-[node name="FarLeft" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_heev7")]
+[node name="FarLeft" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("4_h3jrj")]
 position = Vector2(-149, 156)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
@@ -367,7 +359,7 @@ position = Vector2(-85, 1)
 [node name="RightBound" type="Marker2D" parent="JumpLocations/FarLeft"]
 position = Vector2(97, 1)
 
-[node name="FarRight" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("3_heev7")]
+[node name="FarRight" parent="JumpLocations" node_paths=PackedStringArray("left_bound", "right_bound") instance=ExtResource("4_h3jrj")]
 position = Vector2(1458, 160)
 left_bound = NodePath("LeftBound")
 right_bound = NodePath("RightBound")
@@ -391,40 +383,40 @@ position = Vector2(78, -1)
 
 [node name="ClockHolder" type="Node2D" parent="."]
 
-[node name="EnemyDeer" parent="." node_paths=PackedStringArray("player", "current_landing", "jump_locations_holder", "projectile_nodes_holder") instance=ExtResource("6_eubv1")]
+[node name="EnemyDeer" parent="." node_paths=PackedStringArray("player", "current_landing", "jump_locations_holder", "projectile_nodes_holder") instance=ExtResource("5_xdwui")]
 position = Vector2(635, -75)
-player = NodePath("../Player")
-current_landing = NodePath("../JumpLocations/TopMiddle")
-jump_locations_holder = NodePath("../JumpLocations")
-throw_scene = ExtResource("7_jdlir")
-burst_scene = ExtResource("7_jdlir")
-spiral_scene = ExtResource("7_jdlir")
-consecutive_scene = ExtResource("7_jdlir")
-burst_projectile_resource = SubResource("Resource_i0gl1")
-throw_projectile_resource = SubResource("Resource_ekhu8")
-spiral_projectile_resource = SubResource("Resource_acxuv")
-consecutive_projectile_resource = SubResource("Resource_5l27p")
-projectile_nodes_holder = NodePath("../Projectiles")
+player = NodePath("")
+current_landing = NodePath("")
+jump_locations_holder = NodePath("")
+throw_scene = ExtResource("6_fsmpa")
+burst_scene = ExtResource("6_fsmpa")
+spiral_scene = ExtResource("6_fsmpa")
+consecutive_scene = ExtResource("6_fsmpa")
+burst_projectile_resource = SubResource("Resource_r6ag6")
+throw_projectile_resource = SubResource("Resource_5wxe0")
+spiral_projectile_resource = SubResource("Resource_6qm6k")
+consecutive_projectile_resource = SubResource("Resource_fc0uf")
+projectile_nodes_holder = NodePath("")
 
 [node name="PCamTarget" type="Node2D" parent="EnemyDeer"]
 position = Vector2(0, 2)
-script = ExtResource("8_qtl6u")
+script = ExtResource("8_4tuh4")
 radius = 100.0
 
-[node name="Player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("9_wvh0r")]
+[node name="Player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("9_3dvwx")]
 position = Vector2(495, 448)
-enemy = NodePath("../EnemyDeer")
+enemy = NodePath("")
 
 [node name="PCamTarget" type="Node2D" parent="Player"]
-script = ExtResource("8_qtl6u")
+script = ExtResource("8_4tuh4")
 radius = 250.0
 disable_outside_limits = false
 
 [node name="ProCam2D" type="Node2D" parent="."]
 z_index = 4096
 position = Vector2(497, 449)
-script = ExtResource("10_c0uos")
-addons = Array[ExtResource("11_qbglm")]([SubResource("Resource_u3ojo")])
+script = ExtResource("10_4aw6x")
+addons = Array[ExtResource("11_3614s")]([SubResource("Resource_u3ojo")])
 process_frame = 2
 follow_mode = 1
 drag_type = 0
@@ -460,11 +452,11 @@ collision_layer = 64
 collision_mask = 168
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
-shape = SubResource("RectangleShape2D_xnlx3")
+shape = SubResource("RectangleShape2D_dtm8v")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Level_UI" parent="UI" instance=ExtResource("13_sw46b")]
+[node name="Level_UI" parent="UI" instance=ExtResource("13_vyfeo")]
 metadata/_edit_use_anchors_ = true
 
 [node name="ClockSpawner" type="Area2D" parent="."]
@@ -472,30 +464,26 @@ position = Vector2(-246, -120)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClockSpawner"]
 position = Vector2(899.125, -104)
-shape = SubResource("RectangleShape2D_ke6ye")
+shape = SubResource("RectangleShape2D_ynpnv")
 
 [node name="InvisibleWallLeft" type="StaticBody2D" parent="."]
 position = Vector2(-329, 253)
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWallLeft"]
-shape = SubResource("RectangleShape2D_8coq3")
+shape = SubResource("RectangleShape2D_gpgmf")
 
 [node name="InvisibleWallRight" type="StaticBody2D" parent="."]
 position = Vector2(1668, 211)
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWallRight"]
-shape = SubResource("RectangleShape2D_07i1h")
+shape = SubResource("RectangleShape2D_tpbd3")
 
 [node name="PCamRoom" type="Node2D" parent="."]
 position = Vector2(652, 169)
-script = ExtResource("4_nf3g2")
+script = ExtResource("14_h6ng5")
 room_size = Vector2(1800, 1200)
 zoom = 1.0
 open_sides = 0
 priority = 1
-
-[connection signal="update_hp_bar" from="EnemyDeer" to="UI/Level_UI" method="_on_enemy_update_hp_bar"]
-[connection signal="ui_heart_damage" from="Player" to="UI/Level_UI" method="_on_player_ui_heart_damage"]
-[connection signal="update_clock_ui" from="Player" to="UI/Level_UI" method="_on_player_update_clock_ui"]
